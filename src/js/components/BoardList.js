@@ -3,7 +3,9 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {Link} from 'react-router-dom';
 
-const BoardList = ({boards, onAddBoardSubmit}) => {
+const BoardList = ({boards, onAddBoardSubmit, displayBoard}) => {
+  displayBoard(null);
+
   let input;
 
   return (

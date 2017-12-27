@@ -39,6 +39,7 @@ const saveState = (state) => {
 };
 
 let initialState = {
+  activeBoard: null,
   boards: [
     {
       id: 1,
@@ -64,10 +65,9 @@ let initialState = {
 let reducer = (state, action) => {
   console.log(`action: ${action.type}`);
 
-  let newState = state;
   switch (action.type) {
     case 'ADD_BOARD':      
-      return {
+      return Object.assign({}, state, {
         boards: [
           ...state.boards,
           {
@@ -76,11 +76,15 @@ let reducer = (state, action) => {
             lists: [],
           },
         ],
-      };
+      });
       break;
     case 'DELETE_BOARD':
       break;
     case 'RENAME_BOARD':
+      break;
+
+    case 'DISPLAY_BOARD':
+      return Object.assign({}, state, {activeBoard: parseInt(action.id)});
       break;
     
     case 'ADD_LIST':
@@ -100,6 +104,7 @@ let reducer = (state, action) => {
       break;
 
     default:
+      console.warn(`action type '${action.type}' did not match an action in the reducer. Using default case.`);
       return state;
   }
 }

@@ -20,6 +20,13 @@ export const renameBoard = (id, name) => {
   }
 };
 
+export const displayBoard = (id) => {
+  return {
+    type: 'DISPLAY_BOARD',
+    id,
+  }
+};
+
 export const addList = (name) => {
   return {
     type: 'ADD_LIST',
