@@ -7,6 +7,7 @@ const Card = ({card}) => {
         <div>
             <div>Card Name: {card.name}</div>
             <div>Card Desc: {card.description}</div>
+            <br />
         </div>
     );
 };

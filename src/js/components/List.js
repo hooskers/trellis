@@ -8,6 +8,7 @@ const List = ({list, onAddList}) => {
     console.log(list);
     return (
         <div>
+            <hr />
             <div>List: {list.name}</div>
             {list.cards.map(card =>
                 <CardContainer key={uuidv4()} card={card} />

@@ -6,7 +6,9 @@ import {addList, deleteList, renameList, renameBoard, displayBoard} from '../act
 import Board from '../components/Board';
 
 const mapStateToProps = (state) => ({
-  boards: state.boards,
+  boardName: state.boards[state.activeBoard - 1].name,
+  listsLength: state.boards[state.activeBoard - 1].lists.length,
+  board: state.boards[state.activeBoard - 1],
 });
 
 const mapDispatchToProps = {

@@ -6,7 +6,7 @@ import {addList, deleteList, renameList, addCard, deleteCard, saveCard, doneCard
 import List from '../components/List';
 
 const mapStateToProps = (state) => ({
-    lists: state.boards[state.activeBoard].lists,
+    lists: state.boards[state.activeBoard - 1].lists,
 });
 
 const mapDispatchToProps = {

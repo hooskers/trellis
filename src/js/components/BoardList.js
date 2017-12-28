@@ -16,17 +16,17 @@ const BoardList = ({boards, onAddBoardSubmit, displayBoard}) => {
           return;
         }
 
-        onAddBoardSubmit(input.value.trim())
+        onAddBoardSubmit(input.value.trim());
         input.value = '';
       }}>
         <input placeholder="New board name"
-        ref={node => {
-          input = node;
+          ref={node => {
+            input = node;
         }} />
         <button type="submit">Add board</button>
       </form>
 
-      {boards.map(board => <Link to={'board/'+board.id} key={board.id}>{board.name}<br/></Link>)}
+      {boards.map(board => <Link to={'board/'+board.id} key={board.id} onClick={() => displayBoard(board.id)}>{board.name}<br/></Link>)}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {HashRouter, Switch, Route} from 'react-router-dom';
 import throttle from 'lodash/throttle';
+import uuidv4 from 'uuid/v4';
 
 import BoardListContainer from './containers/BoardListContainer';
 import BoardContainer from './containers/BoardContainer';
@@ -65,6 +66,34 @@ let initialState = {
 let reducer = (state, action) => {
   console.log(`action: ${action.type}`);
 
+  let boardIndex, listIndex, cardIndex;
+  let board, list, card;
+
+  if (action.hasOwnProperty('boardId')) {
+    boardIndex = state.boards.findIndex(board => board.id === action.boardId);
+    board = state.boards[boardIndex];
+    console.log('BoardIndex:' + boardIndex);
+  }
+
+  if (action.hasOwnProperty('listId')) {
+    if (!!board) {
+      console.error('There is no board. Need the board object to get the correct list');
+    }
+
+    listIndex = board.lists.findIndex(list => list.id === action.listId);
+    list = board.lists[listIndex];
+  }
+
+  if (action.hasOwnProperty('cardId')) {
+    if (!!list) {
+      console.error('There is no list. Need the list object to get the correct card');
+    }
+
+    cardIndex = list.cards.findIndex(card => card.id === action.cardId);
+    card = list.cards[cardIndex];
+  }
+
+
   switch (action.type) {
     case 'ADD_BOARD':
       return {
@@ -88,7 +117,6 @@ let reducer = (state, action) => {
       break;
 
     case 'RENAME_BOARD':
-      let boardIndex = state.boards.findIndexOf((board) => board.id === action.boardId);
       let boards = [...state.boards];
       boards[boardIndex].name = action.boardName;
       return {...state, ...boards};
@@ -99,6 +127,11 @@ let reducer = (state, action) => {
       break;
     
     case 'ADD_LIST':
+      state.boards[boardIndex].lists = [
+        ...state.boards[boardIndex].lists,
+        {id: uuidv4(), name: action.listName, cards: []}
+      ];
+      return {...state};
       break;
 
     case 'DELETE_LIST':
@@ -127,7 +160,11 @@ let reducer = (state, action) => {
 
 const persistedState = loadState();
 
-let store = createStore(reducer, persistedState ? persistedState : initialState);
+let store = createStore(reducer,
+  persistedState ? persistedState : initialState,
+  //TODO: Only use the below argument if in dev build. Remove from prod builds.
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 store.subscribe(throttle(() => {
   saveState(store.getState());
