@@ -66,8 +66,9 @@ let reducer = (state, action) => {
   console.log(`action: ${action.type}`);
 
   switch (action.type) {
-    case 'ADD_BOARD':      
-      return Object.assign({}, state, {
+    case 'ADD_BOARD':
+      return {
+        ...state,
         boards: [
           ...state.boards,
           {
@@ -76,30 +77,45 @@ let reducer = (state, action) => {
             lists: [],
           },
         ],
-      });
+      };
       break;
+
     case 'DELETE_BOARD':
+      return {
+        ...state,
+        boards: state.boards.filter((board) => board.id !== action.id),
+      };
       break;
+
     case 'RENAME_BOARD':
+      let boardIndex = state.boards.findIndexOf((board) => board.id === action.id);
+      let boards = [...state.boards];
+      boards[boardIndex].name = action.name;
+      return {...state, ...boards};
       break;
 
     case 'DISPLAY_BOARD':
-      return Object.assign({}, state, {activeBoard: parseInt(action.id)});
+      return {...state, activeBoard: parseInt(action.id)};
       break;
     
     case 'ADD_LIST':
       break;
+
     case 'DELETE_LIST':
       break;
+
     case 'RENAME_LIST':
       break;
 
     case 'ADD_CARD':
       break;
+
     case 'DELETE_CARD':
       break;
+
     case 'SAVE_CARD':
       break;
+
     case 'DONE_CARD':
       break;
 
@@ -122,12 +138,9 @@ render(
     <HashRouter>
       <Switch>
         <Route exact path='/' component={BoardListContainer} />
-        {/* Exact path for specific board id*/}
         <Route exact path='/board/:id' component={BoardContainer} />
       </Switch>
     </HashRouter>
-    {/* <BoardListContainer></BoardListContainer> */}
-    {/* <div className={style}>Hello World!</div> */}
   </Provider>,
   
   document.getElementById('app')

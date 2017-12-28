@@ -1,81 +1,92 @@
-export const addBoard = (name) => {
+export const addBoard = (boardName) => {
   return {
     type: 'ADD_BOARD',
-    name,
+    boardName,
   }
 };
 
-export const deleteBoard = (id) => {
+export const deleteBoard = (boardId) => {
   return {
     type: 'DELETE_BOARD',
-    id,
+    boardId,
   }
 };
 
-export const renameBoard = (id, name) => {
+export const renameBoard = (boardId, boardName) => {
   return {
     type: 'RENAME_BOARD',
-    id,
-    name,
+    boardId,
+    boardName,
   }
 };
 
-export const displayBoard = (id) => {
+export const displayBoard = (boardId) => {
   return {
     type: 'DISPLAY_BOARD',
-    id,
+    boardId,
   }
 };
 
-export const addList = (name) => {
+export const addList = (boardId, listName) => {
   return {
     type: 'ADD_LIST',
-    name,
+    boardId,
+    listName,
   }
 };
 
-export const deleteList = (id) => {
+export const deleteList = (boardId, listId) => {
   return {
     type: 'DELETE_LIST',
-    id,
+    boardId,
+    listId,
   }
 };
 
-export const renameList = (id, name) => {
+export const renameList = (boardId, listId, listName) => {
   return {
     type: 'RENAME_LIST',
-    id,
-    name,
+    boardId,
+    listId,
+    listName,
   }
 };
 
-export const addCard = (name, description) => {
+export const addCard = (boardId, listId, cardName, cardDescription) => {
   return {
     type: 'ADD_CARD',
-    name,
-    description,
+    boardId,
+    listId,
+    cardName,
+    cardDescription,
   }
 };
 
-export const deleteCard = (id) => {
+export const deleteCard = (boardId, listId, cardId) => {
   return {
     type: 'DELETE_CARD',
-    id,
+    boardId,
+    listId,
+    cardId,
   }
 };
 
-export const saveCard = (id, name, description) => {
+export const saveCard = (boardId, listId, cardId, cardName, cardDescription) => {
   return {
     type: 'SAVE_CARD',
-    id: id,
-    name,
-    description,
+    boardId,
+    listId,
+    cardId,
+    cardName,
+    cardDescription,
   }
 };
 
-export const doneCard = (id) => {
+export const doneCard = (boardId, listId, cardId) => {
   return {
     type: 'DONE_CARD',
-    id,
+    boardId,
+    listId,
+    cardId,
   }
 };
