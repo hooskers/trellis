@@ -76,7 +76,8 @@ let reducer = (state, action) => {
   }
 
   if (action.hasOwnProperty('listId')) {
-    if (!!board) {
+    console.log(board);
+    if (!board) {
       console.error('There is no board. Need the board object to get the correct list');
     }
 
@@ -85,7 +86,7 @@ let reducer = (state, action) => {
   }
 
   if (action.hasOwnProperty('cardId')) {
-    if (!!list) {
+    if (!list) {
       console.error('There is no list. Need the list object to get the correct card');
     }
 
@@ -141,6 +142,11 @@ let reducer = (state, action) => {
       break;
 
     case 'ADD_CARD':
+      state.boards[boardIndex].lists[listIndex].cards = [
+        ...state.boards[boardIndex].lists[listIndex].cards,
+        {id: uuidv4(), name: action.cardName, description: '', done: false},
+      ];
+      return {...state};
       break;
 
     case 'DELETE_CARD':

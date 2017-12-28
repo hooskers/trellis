@@ -35,7 +35,7 @@ const Board = ({board, boardName, listsLength, onAddListSubmit, onDisplayBoard, 
       </form>
       
       {displayedBoard.lists.map(list => (
-        <ListContainer key={uuidv4()} list={list} />
+        <ListContainer key={uuidv4()} boardId={boardId} list={list}/>
       ))}
     </div>
   );
