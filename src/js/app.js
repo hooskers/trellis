@@ -73,7 +73,7 @@ let reducer = (state, action) => {
           ...state.boards,
           {
             id: state.boards.length + 1,
-            name: action.name,
+            name: action.boardName,
             lists: [],
           },
         ],
@@ -83,19 +83,19 @@ let reducer = (state, action) => {
     case 'DELETE_BOARD':
       return {
         ...state,
-        boards: state.boards.filter((board) => board.id !== action.id),
+        boards: state.boards.filter((board) => board.id !== action.boardId),
       };
       break;
 
     case 'RENAME_BOARD':
-      let boardIndex = state.boards.findIndexOf((board) => board.id === action.id);
+      let boardIndex = state.boards.findIndexOf((board) => board.id === action.boardId);
       let boards = [...state.boards];
-      boards[boardIndex].name = action.name;
+      boards[boardIndex].name = action.boardName;
       return {...state, ...boards};
       break;
 
     case 'DISPLAY_BOARD':
-      return {...state, activeBoard: parseInt(action.id)};
+      return {...state, activeBoard: parseInt(action.boardId)};
       break;
     
     case 'ADD_LIST':

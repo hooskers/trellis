@@ -28,7 +28,7 @@ const BoardList = ({boards, onAddBoardSubmit, displayBoard}) => {
 
       {boards.map(board => <Link to={'board/'+board.id} key={board.id}>{board.name}<br/></Link>)}
     </div>
-  )
-}
+  );
+};
 
 export default BoardList;
