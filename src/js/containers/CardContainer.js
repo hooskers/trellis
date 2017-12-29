@@ -2,9 +2,21 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {connect} from 'react-redux';
-import {deleteCard, saveCard, doneCard} from '../actions';
+import {saveCard, doneCard} from '../actions';
 import Card from '../components/Card';
 
-const CardContainer = connect()(Card);
+const mapStateToProps = (state, ownProps) => ({
+  card: ownProps.card,
+});
+
+const mapDispatchToProps = {
+  onSaveCard: saveCard,
+  onDoneCard: doneCard,
+};
+
+const CardContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Card);
 
 export default CardContainer;

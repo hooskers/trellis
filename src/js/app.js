@@ -102,7 +102,7 @@ let reducer = (state, action) => {
         boards: [
           ...state.boards,
           {
-            id: state.boards.length + 1,
+            id: state.boards[state.boards.length].id + 1,
             name: action.boardName,
             lists: [],
           },
@@ -111,16 +111,14 @@ let reducer = (state, action) => {
       break;
 
     case 'DELETE_BOARD':
-      return {
-        ...state,
-        boards: state.boards.filter((board) => board.id !== action.boardId),
-      };
+      state.boards.splice(boardIndex, 1);
+      return {...state, boards: [...state.boards]};
       break;
 
     case 'RENAME_BOARD':
       let boards = [...state.boards];
       boards[boardIndex].name = action.boardName;
-      return {...state, ...boards};
+      return {...state, boards: [...boards]};
       break;
 
     case 'DISPLAY_BOARD':
@@ -136,26 +134,54 @@ let reducer = (state, action) => {
       break;
 
     case 'DELETE_LIST':
+      state.boards[boardIndex].lists.splice(listIndex, 1);
+      return {...state};
       break;
 
     case 'RENAME_LIST':
+      state.boards[boardIndex].lists[listIndex].name = action.listName;
+      return {...state};
       break;
 
     case 'ADD_CARD':
       state.boards[boardIndex].lists[listIndex].cards = [
         ...state.boards[boardIndex].lists[listIndex].cards,
-        {id: uuidv4(), name: action.cardName, description: '', done: false},
+        {id: uuidv4(),
+          name: action.cardName,
+          description: action.cardDescription,
+          done: false,
+        },
       ];
       return {...state};
       break;
 
     case 'DELETE_CARD':
+      state.boards[boardIndex].lists[listIndex].cards.splice(cardIndex, 1);
+      return {...state};
       break;
 
     case 'SAVE_CARD':
       break;
 
     case 'DONE_CARD':
+      let cardArray = state.boards[boardIndex].lists[listIndex].cards;
+      cardArray.splice(cardIndex, 1);
+      if (!card.done) {
+        cardArray = [
+          ...cardArray,
+          {...card, done: true},
+        ];
+      } else {
+        let insertIndex = cardArray.findIndex(card => card.done);
+        if (insertIndex >= 0) {
+          cardArray.splice(insertIndex, 0, {...card, done: false});
+        } else {
+          cardArray.splice(cardArray.length, 0, {...card, done: false});
+        }
+        cardArray = [...cardArray];
+      }
+      state.boards[boardIndex].lists[listIndex].cards = [...cardArray];
+      return {...state};
       break;
 
     default:

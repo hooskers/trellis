@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onAddBoardSubmit: addBoard,
+  onDeleteBoard: deleteBoard,
   displayBoard,
 };
 

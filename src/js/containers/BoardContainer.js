@@ -5,15 +5,22 @@ import {connect} from 'react-redux';
 import {addList, deleteList, renameList, renameBoard, displayBoard} from '../actions.js';
 import Board from '../components/Board';
 
-const mapStateToProps = (state) => ({
-  boardName: state.boards[state.activeBoard - 1].name,
-  listsLength: state.boards[state.activeBoard - 1].lists.length,
-  board: state.boards[state.activeBoard - 1],
-});
+const mapStateToProps = (state, ownProps) => {
+  let boardIndex = state.boards.findIndex(board =>
+    board.id === parseInt(ownProps.match.params.id)
+  );
+
+  return {
+    boardName: state.boards[boardIndex].name,
+    listsLength: state.boards[boardIndex].lists.length,
+    board: state.boards[boardIndex],
+  }
+}
 
 const mapDispatchToProps = {
-  onAddListSubmit: addList,
+  onAddList: addList,
   onDisplayBoard: displayBoard,
+  onDeleteList: deleteList,
 };
 
 const BoardContainer = connect(

@@ -5,17 +5,21 @@ import {connect} from 'react-redux';
 import {renameList, addCard, deleteCard, saveCard, doneCard} from '../actions';
 import List from '../components/List';
 
-const mapStateToProps = (state, props) => ({
-    cards: props.list.cards,
+const mapStateToProps = (state, ownProps) => ({
+  list: ownProps.list,
+  cards: ownProps.list.cards,
+  cardLength: ownProps.list.cards.length,
 });
 
 const mapDispatchToProps = {
-    onAddCard: addCard,
+  onAddCard: addCard,
+  onDeleteCard: deleteCard,
+  onRenameList: renameList,
 };
 
 const ListContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(List);
 
 export default ListContainer;

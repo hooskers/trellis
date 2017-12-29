@@ -4,10 +4,10 @@ import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import ListContainer from '../containers/ListContainer';
 
-const Board = ({board, boardName, listsLength, onAddListSubmit, onDisplayBoard, match}) => {
+const Board = ({board, boardName, listsLength, onAddList, onDisplayBoard, onDeleteList, match}) => {
   const boardId = parseInt(match.params.id);
 
-  //Uncomment the dispatch function below to route directly to a board
+  //Uncomment the dispatch function below to record active board when routing directly to a board
   //onDisplayBoard(boardId);
 
   let displayedBoard = board;
@@ -24,7 +24,7 @@ const Board = ({board, boardName, listsLength, onAddListSubmit, onDisplayBoard, 
           return;
         }
 
-        onAddListSubmit(boardId, input.value.trim());
+        onAddList(boardId, input.value.trim());
         input.value='';
       }}>
         <input placeholder="New list name"
@@ -35,7 +35,10 @@ const Board = ({board, boardName, listsLength, onAddListSubmit, onDisplayBoard, 
       </form>
       
       {displayedBoard.lists.map(list => (
-        <ListContainer key={uuidv4()} boardId={boardId} list={list}/>
+        <div key={uuidv4()}>
+          <ListContainer boardId={boardId} list={list}/>
+          <button onClick={() => onDeleteList(boardId, list.id)}>Delete list</button>
+        </div>
       ))}
     </div>
   );

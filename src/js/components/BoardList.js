@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {Link} from 'react-router-dom';
+import uuidv4 from 'uuid/v4';
 
-const BoardList = ({boards, onAddBoardSubmit, displayBoard}) => {
+const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, displayBoard}) => {
   displayBoard(null);
 
   let input;
@@ -26,7 +27,15 @@ const BoardList = ({boards, onAddBoardSubmit, displayBoard}) => {
         <button type="submit">Add board</button>
       </form>
 
-      {boards.map(board => <Link to={'board/'+board.id} key={board.id} onClick={() => displayBoard(board.id)}>{board.name}<br/></Link>)}
+      {boards.map(board => 
+        <div key={uuidv4()}>
+          <Link to={'board/'+board.id} board={board} onClick={() => displayBoard(board.id)}>
+            {board.name}
+            <br />
+          </Link>
+          <button onClick={() => onDeleteBoard(board.id)}>Delete board</button>
+        </div>
+        )}
     </div>
   );
 };
