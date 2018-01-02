@@ -7,6 +7,8 @@ import Card from '../components/Card';
 
 const mapStateToProps = (state, ownProps) => ({
   card: ownProps.card,
+  cardId: ownProps.card.id,
+  cardDesc: ownProps.card.description,
 });
 
 const mapDispatchToProps = {

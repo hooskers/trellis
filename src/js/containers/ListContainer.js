@@ -7,6 +7,7 @@ import List from '../components/List';
 
 const mapStateToProps = (state, ownProps) => ({
   list: ownProps.list,
+  listName: ownProps.list.name,
   cards: ownProps.list.cards,
   cardLength: ownProps.list.cards.length,
 });

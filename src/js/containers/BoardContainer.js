@@ -6,13 +6,16 @@ import {addList, deleteList, renameList, renameBoard, displayBoard} from '../act
 import Board from '../components/Board';
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps);
   let boardIndex = state.boards.findIndex(board =>
     board.id === parseInt(ownProps.match.params.id)
   );
 
+  let board = state.boards[boardIndex];
+
   return {
     boardName: state.boards[boardIndex].name,
-    listsLength: state.boards[boardIndex].lists.length,
+    //listsLength: state.boards[boardIndex].lists.length,
     board: state.boards[boardIndex],
   }
 }
