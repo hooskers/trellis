@@ -43,49 +43,43 @@ export const deleteList = (boardId, listId) => {
   }
 };
 
-export const renameList = (boardId, listId, listName) => {
+export const renameList = (listId, listName) => {
   return {
     type: 'RENAME_LIST',
-    boardId,
     listId,
     listName,
   }
 };
 
-export const addCard = (boardId, listId, cardName, cardDescription) => {
+export const addCard = (listId, cardName, cardDescription) => {
   return {
     type: 'ADD_CARD',
-    boardId,
     listId,
     cardName,
     cardDescription,
   }
 };
 
-export const deleteCard = (boardId, listId, cardId) => {
+export const deleteCard = (listId, cardId) => {
   return {
     type: 'DELETE_CARD',
-    boardId,
     listId,
     cardId,
   }
 };
 
-export const saveCard = (boardId, listId, cardId, cardName, cardDescription) => {
+export const saveCard = (cardId, cardName, cardDescription) => {
   return {
     type: 'SAVE_CARD',
-    boardId,
-    listId,
     cardId,
     cardName,
     cardDescription,
   }
 };
 
-export const doneCard = (boardId, listId, cardId) => {
+export const doneCard = (listId, cardId) => {
   return {
     type: 'DONE_CARD',
-    boardId,
     listId,
     cardId,
   }

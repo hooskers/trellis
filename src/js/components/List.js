@@ -4,15 +4,15 @@ import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import CardContainer from '../containers/CardContainer';
 
-const List = ({boardId, list, onAddCard, onDeleteCard, onRenameList}) => {
-    console.log(list);
-
+const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList}) => {
     let listNameInput;
     let cardNameInput, cardDescInput;
+
     return (
       <div>
         <hr />
-        <div>List: {list.name}</div>
+        <div>List: {name}</div>
+        <button onClick={() => onDeleteList(boardId, id)}>Delete list</button>
 
         <form
         onSubmit={e => {
@@ -21,7 +21,7 @@ const List = ({boardId, list, onAddCard, onDeleteCard, onRenameList}) => {
             return;
           }
 
-          onRenameList(boardId, list.id, listNameInput.value.trim());
+          onRenameList(id, listNameInput.value.trim());
 
           listNameInput.value = '';
         }}
@@ -40,8 +40,7 @@ const List = ({boardId, list, onAddCard, onDeleteCard, onRenameList}) => {
           }
 
           onAddCard(
-            boardId,
-            list.id,
+            id,
             cardNameInput.value.trim(),
             cardDescInput.value
           );
@@ -63,10 +62,9 @@ const List = ({boardId, list, onAddCard, onDeleteCard, onRenameList}) => {
           <button type="submit">Add card</button>
         </form>
         
-        {list.cards.map(card =>
+        {cardIds.map(cardId =>
           <div key={uuidv4()}>
-            <CardContainer boardId={boardId} listId={list.id} card={card} />
-            <button onClick={() => onDeleteCard(boardId, list.id, card.id)}>Delete card</button>
+            <CardContainer listId={id} cardId={cardId} />
             <br />
             <br />
           </div>

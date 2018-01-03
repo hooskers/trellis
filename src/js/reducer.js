@@ -7,25 +7,80 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case 'ADD_BOARD':
-            state.boards = [
-                ...state.boards,
-                {
-                    id: uuidv4(),
-                    name: action.boardName,
-                },
-            ];
-            return {...state};
+            state.boards[uuidv4()] = {
+                name: action.boardName,
+                lists: [],
+            };
+            return {...state}
 
         case 'DELETE_BOARD':
-            boardIndex = state.boards.findIndex(board => board.id === action.boardId);
-            state.boards.splice(boardIndex);
-            state.boards = [...state.boards];
+            for (let listId of state.boards[action.boardId].listIds) {
+                for (let cardId of state.lists[listId].cardIds) {
+                    delete state.cards[cardId];
+                }
+                delete state.lists[listId];
+            }
+            delete state.boards[action.boardId];
             return {...state};
 
         case 'RENAME_BOARD':
-            boardIndex = state.boards.findIndex(board => board.id === action.boardId);
-            state.boards[boardIndex].name = action.boardName;
-            state.boards[boardIndex] = {...state.boards[boardIndex]};
+            state.boards[action.boardId].name = action.boardName;
+            return {...state};
+
+        case 'ADD_LIST':
+            let newListId = uuidv4();
+            state.lists[newListId] = {
+                id: newListId,
+                name: action.listName,
+                cardIds: [],
+            };
+            state.boards[action.boardId].listIds = [
+                ...state.boards[action.boardId].listIds,
+                newListId,
+            ];
+            return {...state};
+
+        case 'DELETE_LIST':
+            for (let cardId of state.lists[action.listId].cardIds) {
+                delete state.cards[cardId];
+            }
+            delete state.lists[action.listId];
+            state.boards[action.boardId].listIds = [
+                ...state.boards[action.boardId].listIds.filter(listId => listId !== action.listId),
+            ];
+            return {...state};
+
+        case 'RENAME_LIST':
+            state.lists[action.listId].name = action.listName;
+            return {...state};
+
+        case 'ADD_CARD':
+            let newCardId = uuidv4();
+            state.cards[newCardId] = {
+                id: newCardId,
+                name: action.cardName,
+                description: action.cardDescription,
+                done: false,
+            };
+            state.lists[action.listId].cardIds = [
+                ...state.lists[action.listId].cardIds,
+                newCardId,
+            ];
+            return {...state};
+
+        case 'DELETE_CARD':
+            delete state.cards[action.cardId];
+            state.lists[action.listId].cardIds = [
+                ...state.lists[action.listId].cardIds.filter(cardId => cardId !== action.cardId),
+            ];
+            return {...state};
+
+        case 'SAVE_CARD':
+            state.cards[action.cardId] = {
+                ...state.cards[action.cardId],
+                name: action.cardName,
+                description: action.cardDescription,
+            }
             return {...state};
 
         default:

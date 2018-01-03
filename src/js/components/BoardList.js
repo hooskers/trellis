@@ -4,7 +4,7 @@ import {css} from 'react-emotion';
 import {Link} from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
 
-const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, displayBoard}) => {
+const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => {
   displayBoard(null);
 
   let input;
@@ -27,9 +27,9 @@ const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, displayBoard}) => {
         <button type="submit">Add board</button>
       </form>
 
-      {boards.map(board => 
+      {Object.values(boards).map(board => 
         <div key={uuidv4()}>
-          <Link to={'board/'+board.id} board={board} onClick={() => displayBoard(board.id)}>
+          <Link to={'board/'+board.id}>
             {board.name}
             <br />
           </Link>

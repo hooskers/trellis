@@ -2,28 +2,17 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {connect} from 'react-redux';
-import {addList, deleteList, renameList, renameBoard, displayBoard} from '../actions.js';
+import {addList, renameBoard, displayBoard} from '../actions.js';
 import Board from '../components/Board';
 
-const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
-  let boardIndex = state.boards.findIndex(board =>
-    board.id === parseInt(ownProps.match.params.id)
-  );
-
-  let board = state.boards[boardIndex];
-
-  return {
-    boardName: state.boards[boardIndex].name,
-    //listsLength: state.boards[boardIndex].lists.length,
-    board: state.boards[boardIndex],
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  ...state.boards[ownProps.match.params.id],
+});
 
 const mapDispatchToProps = {
   onAddList: addList,
+  onRenameBoard: renameBoard,
   onDisplayBoard: displayBoard,
-  onDeleteList: deleteList,
 };
 
 const BoardContainer = connect(
