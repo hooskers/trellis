@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {Link} from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
 
 const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => {
-  displayBoard(null);
+  //displayBoard(null);
 
   let input;
 
   return (
-    <div>
+    <Fragment>
       <form onSubmit={e => {
         e.preventDefault();
         if (!input.value.trim()) {
@@ -36,7 +36,7 @@ const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => 
           <button onClick={() => onDeleteBoard(board.id)}>Delete board</button>
         </div>
         )}
-    </div>
+    </Fragment>
   );
 };
 

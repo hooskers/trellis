@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
@@ -9,7 +9,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
     let cardNameInput, cardDescInput;
 
     return (
-      <div>
+      <Fragment>
         <hr />
         <div>List: {name}</div>
         <button onClick={() => onDeleteList(boardId, id)}>Delete list</button>
@@ -69,7 +69,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
             <br />
           </div>
         )}
-      </div>
+      </Fragment>
     )
 };
 

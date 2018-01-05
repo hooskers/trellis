@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 
 const Card = ({id, name, description, done, listId, onDeleteCard, onSaveCard, onDoneCard}) => {
   let cardNameInput, cardDescInput;
   return (
-      <div>
+      <Fragment>
           <div>Card Name: {name}</div>
           <input placeholder="Edit card name"
           ref={node => {
@@ -28,7 +28,7 @@ const Card = ({id, name, description, done, listId, onDeleteCard, onSaveCard, on
             Save card
           </button>
           <button onClick={() => onDeleteCard(listId, id)}>Delete</button>
-      </div>
+      </Fragment>
   );
 };
 

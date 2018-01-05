@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
@@ -8,7 +8,7 @@ const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameB
   let input;
 
   return (
-    <div>
+    <Fragment>
       <div>Board ID: {id}</div>
       <div>Board Name: {name}</div>
 
@@ -33,7 +33,7 @@ const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameB
           <ListContainer boardId={id} listId={listId}/>
         </div>
       ))}
-    </div>
+    </Fragment>
   );
 };
 
