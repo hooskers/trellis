@@ -37,6 +37,7 @@ class Card extends Component {
         {
           this.state.nameInputFocused ?
           <CardInput
+          tag="input"
           cardId={this.props.id}
           placeholder={"Enter card name"}
           defaultValue={this.props.name}
@@ -47,6 +48,7 @@ class Card extends Component {
         {
           this.state.descInputFocused ?
           <CardInput
+          tag="textarea"
           cardId={this.props.id}
           placeholder={"Enter card description"}
           defaultValue={this.props.description}
@@ -80,7 +82,11 @@ const cardStyle = css`
   margin-top: 5px;
 `;
 
-const CardInput = ({cardId, placeholder, defaultValue, saveInput, hideInput}) => {
+const CardInput = ({tag, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
+  //Since this variable is capitalized, using it as a tag name will make React
+  // call `createComponent` with the value of the `tag` string prop.
+  // It is used here let us show either an `input` or `textarea` element.
+  const TagName = tag;
   let refNode;
 
   return (
@@ -90,7 +96,7 @@ const CardInput = ({cardId, placeholder, defaultValue, saveInput, hideInput}) =>
       saveInput(cardId, refNode.value);
       hideInput();
     }}>
-      <input placeholder={placeholder}
+      <TagName placeholder={placeholder}
       ref={node => {
         refNode = node;
       }}
@@ -98,6 +104,8 @@ const CardInput = ({cardId, placeholder, defaultValue, saveInput, hideInput}) =>
       onBlur={hideInput}
       autoFocus={true}
       onFocus={e => {
+        //React `autocomplete` attribute places the cursor at the beginning
+        // of the input's text. This call back places the cursor at the end.
         let val = e.target.value;
         e.target.value = '';
         e.target.value = val;
