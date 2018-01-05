@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import ListContainer from '../containers/ListContainer';
+import {listStyle} from './List';
 
 const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameBoard, match}) => {
   let input;
@@ -29,7 +30,7 @@ const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameB
       </form>
       
       {listIds.map(listId => (
-        <div key={uuidv4()}>
+        <div className={`list ${listStyle}`} key={uuidv4()}>
           <ListContainer boardId={id} listId={listId}/>
         </div>
       ))}

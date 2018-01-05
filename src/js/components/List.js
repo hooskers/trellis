@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import CardContainer from '../containers/CardContainer';
+import {cardStyle} from './Card';
 
 const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList}) => {
     let listNameInput;
@@ -63,7 +64,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
         </form>
         
         {cardIds.map(cardId =>
-          <div key={uuidv4()}>
+          <div className={cardStyle} key={uuidv4()}>
             <CardContainer listId={id} cardId={cardId} />
             <br />
             <br />
@@ -73,4 +74,13 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
     )
 };
 
+const listStyle = css`
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  padding: 5px;
+`;
+
 export default List;
+export {listStyle};

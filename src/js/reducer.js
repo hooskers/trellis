@@ -83,6 +83,20 @@ const reducer = (state, action) => {
             }
             return {...state};
 
+        case 'SAVE_CARD_NAME':
+            state.cards[action.cardId] = {
+                ...state.cards[action.cardId],
+                name: action.cardName,
+            }
+            return {...state};
+            
+        case 'SAVE_CARD_DESCRIPTION':
+            state.cards[action.cardId] = {
+                ...state.cards[action.cardId],
+                description: action.cardDescription,
+            }
+            return {...state};
+
         default:
             return state;
     }

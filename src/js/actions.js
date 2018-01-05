@@ -77,6 +77,22 @@ export const saveCard = (cardId, cardName, cardDescription) => {
   }
 };
 
+export const saveCardName = (cardId, cardName) => {
+  return {
+    type:'SAVE_CARD_NAME',
+    cardId,
+    cardName,
+  }
+};
+
+export const saveCardDescription = (cardId, cardDescription) => {
+  return {
+    type: 'SAVE_CARD_DESCRIPTION',
+    cardId,
+    cardDescription,
+  }
+};
+
 export const doneCard = (listId, cardId) => {
   return {
     type: 'DONE_CARD',
