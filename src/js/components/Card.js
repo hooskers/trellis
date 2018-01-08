@@ -59,22 +59,15 @@ class Card extends Component {
           <div className={descriptionStyle} onClick={this.showDescInput}>{this.props.description}</div>
         }
         {/* Done: {this.props.done ? "true" : "false"} */}
-        <span className={`${doneStyle}`} onClick={() => this.props.onDoneCard(listId, id)}>D</span>
-        {/* <button disabled="true">Edit</button> */}
-        {/* <button onClick={() => {
-          this.props.onSaveCard(id, cardNameInput.value, this.cardDescInput.value);
-          this.cardNameInput.value = '';
-          this.cardDescInput.value = '';
-        }}>
-          Save card
-        </button> */}
-        <span className={`delete-card ${deleteStyle}`} onClick={() => onDeleteCard(listId, id)}>X</span>
+        <span className={`${doneStyle}`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}>D</span>
+        <span className={`delete-card ${deleteStyle}`} onClick={() => this.props.onDeleteCard(this.props.listId, this.props.id)}>X</span>
       </Fragment>
   );
   }
 }
 
 const titleStyle = css`
+  background-color: white;
   font-weight: bold;
   grid-row-start: 1;
   grid-column-start: 1;
@@ -85,9 +78,11 @@ const titleStyle = css`
   margin-bottom: 0.25em;
   width: 100%;
   height: 1em;
+  border-radius: 2px;
 `;
 
 const descriptionStyle = css`
+  background-color: white;
   min-height: 1em;
   grid-row-start: 2;
   grid-column-start: 1;
@@ -97,19 +92,22 @@ const descriptionStyle = css`
   margin-top: 0.25em;
   margin-bottom: 0.25em;
   width: 100%;
-  height: 5em;
+  max-height: 5em;
   word-wrap: break-word;
   overflow: scroll;
+  border-radius: 2px;
 `;
 
 const doneStyle = css`
-  grid-column-start: 3;
+  grid-column-start: 1;
   grid-row-start: 3;
+  justify-self: start;
 `;
 
 const deleteStyle = css`
-  grid-column-start: 1;
+  grid-column-start: 3;
   grid-row-start: 3;
+  justify-self: end;
 `;
 
 const cardStyle = css`
@@ -120,7 +118,7 @@ const cardStyle = css`
   padding: 5px;
   display: grid;
   grid-template-columns: 10fr 80fr 10fr;
-  grid-template-rows: 2em 6em auto;
+  grid-template-rows: 2em auto 1em;
 `;
 
 const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
