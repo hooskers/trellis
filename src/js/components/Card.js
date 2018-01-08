@@ -58,7 +58,6 @@ class Card extends Component {
           hideInput={this.hideDescInput} /> :
           <div className={descriptionStyle} onClick={this.showDescInput}>{this.props.description}</div>
         }
-        {/* Done: {this.props.done ? "true" : "false"} */}
         <span className={`${doneStyle}`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}>D</span>
         <span className={`delete-card ${deleteStyle}`} onClick={() => this.props.onDeleteCard(this.props.listId, this.props.id)}>X</span>
       </Fragment>
