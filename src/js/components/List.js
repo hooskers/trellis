@@ -64,7 +64,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
         </form>
         
         {cardIds.map(cardId =>
-          <div className={cardStyle} key={uuidv4()}>
+          <div className={`card ${cardStyle}`} key={uuidv4()}>
             <CardContainer listId={id} cardId={cardId} />
             <br />
             <br />
