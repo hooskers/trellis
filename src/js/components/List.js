@@ -11,10 +11,12 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
 
     return (
       <Fragment>
-        <hr />
-        <div>List: {name}</div>
-        <button onClick={() => onDeleteList(boardId, id)}>Delete list</button>
+        {/* float to the left */}
+        <div>{name}</div>
+        {/* float to the right, lined up with title */}
+        <div className={`ion-trash-a`} onClick={() => onDeleteList(boardId, id)}></div>
 
+        {/* Only show this form when list title is clicked. Same behavior as card title/description */}
         <form
         onSubmit={e => {
           e.preventDefault();
@@ -33,6 +35,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
           }} />
         </form>
 
+        {/* Only show this form when list title is clicked. Same behavior as card title/description */}
         <form 
         onSubmit={e => {
           e.preventDefault();
@@ -75,7 +78,9 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
 };
 
 const listStyle = css`
-  border: 1px solid black;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 1px #0000005c;
   display: flex;
   flex-direction: column;
   width: 15vw;
