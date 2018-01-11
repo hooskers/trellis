@@ -79,7 +79,9 @@ const listStyle = css`
   display: flex;
   flex-direction: column;
   width: 15vw;
-  padding: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
 `;
 
 export default List;

@@ -58,66 +58,70 @@ class Card extends Component {
           hideInput={this.hideDescInput} /> :
           <div className={descriptionStyle} onClick={this.showDescInput}>{this.props.description}</div>
         }
-        <span className={`${doneStyle}`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}>D</span>
-        <span className={`delete-card ${deleteStyle}`} onClick={() => this.props.onDeleteCard(this.props.listId, this.props.id)}>X</span>
+        <span className={`${doneStyle} ion-checkmark`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}></span>
+        <span className={`delete-card ${deleteStyle} ion-trash-a`} onClick={() => this.props.onDeleteCard(this.props.listId, this.props.id)}></span>
       </Fragment>
   );
   }
 }
 
-const titleStyle = css`
+const cardTitleDescStyle = css`
   background-color: white;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  border-radius: 3px;
+`;
+
+const titleStyle = css`
+  ${cardTitleDescStyle}
   font-weight: bold;
   grid-row-start: 1;
   grid-column-start: 1;
   grid-column-end: 4;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-  width: 100%;
   height: 1em;
-  border-radius: 2px;
 `;
 
 const descriptionStyle = css`
-  background-color: white;
-  min-height: 1em;
+  ${cardTitleDescStyle}
   grid-row-start: 2;
   grid-column-start: 1;
   grid-column-end: 4;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-  width: 100%;
+  min-height: 1em;
   max-height: 5em;
   word-wrap: break-word;
-  overflow: scroll;
-  border-radius: 2px;
+  overflow: auto;
 `;
 
 const doneStyle = css`
   grid-column-start: 1;
   grid-row-start: 3;
   justify-self: start;
+  color: green;
+  cursor: pointer;
 `;
 
 const deleteStyle = css`
   grid-column-start: 3;
   grid-row-start: 3;
   justify-self: end;
+  color: red;
+  cursor: pointer;
 `;
 
 const cardStyle = css`
-  border: solid 1px red;
   border-radius: 5px;
   margin-top: 5px;
+  margin-bottom: 5px;
   background-color: lightgray;
   padding: 5px;
   display: grid;
   grid-template-columns: 10fr 80fr 10fr;
   grid-template-rows: 2em auto 1em;
+  box-shadow: #00000061 2px 3px 7px 0px
 `;
 
 const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
