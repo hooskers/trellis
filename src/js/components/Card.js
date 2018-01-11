@@ -131,6 +131,11 @@ const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput
   const TagName = tag;
   let refNode;
 
+  const cardDescInput = css`
+    min-height: 1em;
+    height: 7em;
+  `;
+
   return (
     <form
     className={className}
@@ -157,7 +162,9 @@ const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput
         let val = e.target.value;
         e.target.value = '';
         e.target.value = val;
-      }} />
+      }}
+      style={{width: '100%', maxWidth: '100%'}}
+      className={tag === 'desc' ? cardDescInput : ''} />
     </form>
   );
 };
