@@ -5,35 +5,82 @@ import uuidv4 from 'uuid/v4';
 import CardContainer from '../containers/CardContainer';
 import {cardStyle} from './Card';
 
-const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList}) => {
-    let listNameInput;
+const ListTitleInput = ({onRenameList, listId, defaultValue, hideInput}) => {
+  let listNameInput;
+  return (
+    <form
+    style={{marginBottom: 0}}
+    className='list-title'
+    onSubmit={e => {
+      e.preventDefault();
+      if (listNameInput.value.trim() === "") {
+        return;
+      }
+
+      onRenameList(listId, listNameInput.value.trim());
+      hideInput();
+    }}
+    >
+      <input placeholder="Rename list"
+      autoFocus={true}
+      defaultValue={defaultValue}
+      onFocus={e => {
+        //React `autocomplete` attribute places the cursor at the beginning
+        // of the input's text. This call back places the cursor at the end.
+        let val = e.target.value;
+        e.target.value = '';
+        e.target.value = val;
+      }}
+      onBlur={(e) => {
+        e.preventDefault();
+        if (listNameInput.value.trim() === "") {
+          hideInput();
+          return;
+        }
+
+        onRenameList(listId, listNameInput.value.trim());
+        hideInput();
+      }}
+      ref={node => {
+        listNameInput = node;
+      }} />
+    </form>
+  )
+}
+
+//const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList}) => {
+class List extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      listTitleFocused: false,
+    }
+  }
+  
+  toggleTitleFocus = () => {
+    this.setState({listTitleFocused: !this.state.listTitleFocused})
+  }
+
+  render() {
     let cardNameInput, cardDescInput;
 
     return (
       <Fragment>
-        {/* float to the left */}
-        <div>{name}</div>
-        {/* float to the right, lined up with title */}
-        <div className={`ion-trash-a`} onClick={() => onDeleteList(boardId, id)}></div>
+        <div className={`${listTitleStyle}`}>
+          {!this.state.listTitleFocused ? 
+          <span className='list-title' onClick={this.toggleTitleFocus}>{this.props.name}</span> :
+          <ListTitleInput onRenameList={this.props.onRenameList} 
+          listId={this.props.id}
+          defaultValue={this.props.name}
+          toggleTitleFocus={this.toggleTitleFocus}
+          hideInput={this.toggleTitleFocus}
+          />}
+          <span className={`list-delete ion-trash-a`} onClick={() => this.props.onDeleteList(boardId, id)}></span>
+        </div>
 
         {/* Only show this form when list title is clicked. Same behavior as card title/description */}
-        <form
-        onSubmit={e => {
-          e.preventDefault();
-          if (!listNameInput.value.trim()) {
-            return;
-          }
-
-          onRenameList(id, listNameInput.value.trim());
-
-          listNameInput.value = '';
-        }}
-        >
-          <input placeholder="Rename list"
-          ref={node => {
-            listNameInput = node;
-          }} />
-        </form>
+        
 
         {/* Only show this form when list title is clicked. Same behavior as card title/description */}
         <form 
@@ -43,7 +90,7 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
             return;
           }
 
-          onAddCard(
+          this.props.onAddCard(
             id,
             cardNameInput.value.trim(),
             cardDescInput.value
@@ -66,16 +113,17 @@ const List = ({id, name, cardIds, boardId, onAddCard, onDeleteList, onRenameList
           <button type="submit">Add card</button>
         </form>
         
-        {cardIds.map(cardId =>
+        {this.props.cardIds.map(cardId =>
           <div className={`card ${cardStyle}`} key={uuidv4()}>
-            <CardContainer listId={id} cardId={cardId} />
+            <CardContainer listId={this.props.id} cardId={cardId} />
             <br />
             <br />
           </div>
         )}
       </Fragment>
     )
-};
+  }
+}
 
 const listStyle = css`
   background-color: whitesmoke;
@@ -84,9 +132,20 @@ const listStyle = css`
   display: flex;
   flex-direction: column;
   width: 15vw;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 8px;
+  padding: 8px;
+`;
+
+const listTitleStyle = css`
+  .list-title {
+    float: left;
+  }
+
+  .list-delete {
+    float: right;
+    &:hover {
+      color: red;
+    }
+  }
 `;
 
 export default List;

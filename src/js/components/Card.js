@@ -44,7 +44,7 @@ class Card extends Component {
           defaultValue={this.props.name}
           saveInput={this.props.onSaveCardName}
           hideInput={this.hideNameInput} /> :
-          <div className={`${titleStyle}`}onClick={this.showNameInput}>{this.props.name}</div>
+          <div className={`${titleStyle}`} onClick={this.showNameInput}>{this.props.name}</div>
         }
         {
           this.state.descInputFocused ?
@@ -100,16 +100,20 @@ const doneStyle = css`
   grid-column-start: 1;
   grid-row-start: 3;
   justify-self: start;
-  color: green;
   cursor: pointer;
+  &:hover {
+    color: green;
+  }
 `;
 
 const deleteStyle = css`
   grid-column-start: 3;
   grid-row-start: 3;
   justify-self: end;
-  color: red;
   cursor: pointer;
+  &:hover {
+    color: red;
+  }
 `;
 
 const cardStyle = css`
