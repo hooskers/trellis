@@ -5,6 +5,13 @@ import PropTypes from 'prop-types';
 
 import CardInput from './CardInput';
 
+/**
+ * Card element that shows name, description, done/delete buttons.
+ * Clicking the title element will display an input in its place to change
+ *  using the `showNameInput` and `hideNameInput` functions.
+ * Clicking the description element will dispaly an input in its place to change
+ *  using the `showDescInput` and `hideDescInput` functions.
+ */
 class Card extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +45,8 @@ class Card extends Component {
     return (
       <Fragment>
         {
+          //If the title input was clicked, show the title input
+          //Otherwise, just show the title text
           this.state.nameInputFocused ?
           <CardInput
           className={`${titleStyle}`}
@@ -46,10 +55,13 @@ class Card extends Component {
           placeholder={"Enter card name"}
           defaultValue={this.props.name}
           saveInput={this.props.onSaveCardName}
-          hideInput={this.hideNameInput} /> :
+          hideInput={this.hideNameInput} 
+          /> :
           <div className={`${titleStyle}`} onClick={this.showNameInput}>{this.props.name}</div>
         }
         {
+          //If the description input was clicked, show the description input
+          //Otherwise, just show the description text
           this.state.descInputFocused ?
           <CardInput
           className={`${descriptionStyle}`}
@@ -58,7 +70,8 @@ class Card extends Component {
           placeholder={"Enter card description"}
           defaultValue={this.props.description}
           saveInput={this.props.onSaveCardDescription}
-          hideInput={this.hideDescInput} /> :
+          hideInput={this.hideDescInput} 
+          /> :
           <div className={descriptionStyle} onClick={this.showDescInput}>{this.props.description}</div>
         }
         <span className={`${doneStyle} ion-checkmark`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}></span>
@@ -69,13 +82,19 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+  /** ID of the card */
   id:          PropTypes.string.isRequired,
+  /** Name of the card */
   name:        PropTypes.string.isRequired,
+  /** Description of the card */
   description: PropTypes.string.isRequired,
+  /** Card's done status */
   done:        PropTypes.bool.isRequired,
+  /** ID of list that card belongs to */
   listId:      PropTypes.string.isRequired,
 };
 
+/** Common styles shared between the card's title and description elements */
 const cardTitleDescStyle = css`
   background-color: white;
   padding-top: 0.25em;
@@ -87,6 +106,7 @@ const cardTitleDescStyle = css`
   border-radius: 3px;
 `;
 
+/** Styles for card's title element */
 const titleStyle = css`
   ${cardTitleDescStyle}
   font-weight: bold;
@@ -96,6 +116,7 @@ const titleStyle = css`
   height: 1em;
 `;
 
+/** Styles for card's description element */
 const descriptionStyle = css`
   ${cardTitleDescStyle}
   grid-row-start: 2;
@@ -107,6 +128,7 @@ const descriptionStyle = css`
   overflow: auto;
 `;
 
+/** Styles for the card's done button */
 const doneStyle = css`
   grid-column-start: 1;
   grid-row-start: 3;
@@ -117,6 +139,7 @@ const doneStyle = css`
   }
 `;
 
+/** Styles for the card's delete button */
 const deleteStyle = css`
   grid-column-start: 3;
   grid-row-start: 3;
@@ -127,6 +150,7 @@ const deleteStyle = css`
   }
 `;
 
+/** Styles for the card component */
 const cardStyle = css`
   border-radius: 5px;
   margin-top: 5px;
