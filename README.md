@@ -6,7 +6,7 @@ This is a simple Trello clone for me to tinker with in my free time.
 - [React](https://github.com/facebook/react)
 - [Redux](https://github.com/reactjs/redux)
 - [React Router](https://github.com/ReactTraining/react-router)
-- [Emotion](https://github.com/emotion-js/emotion) (Let's me keep CSS in the same file as the React component and. I really love this library!)
+- [Emotion](https://github.com/emotion-js/emotion) (Let's me keep CSS in the same file as the React component and use actual CSS syntax. I really love this library!)
 - [Lodash](https://github.com/lodash/lodash) (Just a little)
 
 ## TODO
