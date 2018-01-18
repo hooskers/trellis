@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {connect} from 'react-redux';
+
 import {renameList, deleteList, addCard} from '../actions';
 import List from '../components/List/List';
 

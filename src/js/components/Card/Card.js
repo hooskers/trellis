@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import PropTypes from 'prop-types';
+
 import CardInput from './CardInput';
 
 class Card extends Component {

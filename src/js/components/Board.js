@@ -2,8 +2,9 @@ import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
-import ListContainer from '../containers/ListContainer';
 import PropTypes from 'prop-types';
+
+import ListContainer from '../containers/ListContainer';
 import {listStyle} from './List/List';
 
 const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {

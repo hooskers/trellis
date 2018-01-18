@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
+
 import CardContainer from '../../containers/CardContainer';
 import {cardStyle} from '../Card/Card';
 import ListTitleInput from './ListTitleInput';

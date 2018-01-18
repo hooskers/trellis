@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'emotion';
 import PropTypes from 'prop-types';
+
 import Card from './Card';
 
 const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
