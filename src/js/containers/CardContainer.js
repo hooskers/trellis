@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {connect} from 'react-redux';
 import {saveCard, saveCardName, saveCardDescription, doneCard, deleteCard} from '../actions';
-import Card from '../components/Card';
+import Card from '../components/Card/Card';
 
 const mapStateToProps = (state, ownProps) => ({
   ...state.cards[ownProps.cardId],

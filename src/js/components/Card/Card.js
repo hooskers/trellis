@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
+import CardInput from './CardInput';
 
 class Card extends Component {
   constructor(props) {
@@ -127,51 +128,6 @@ const cardStyle = css`
   grid-template-rows: 2em auto 1em;
   box-shadow: #00000061 2px 3px 7px 0px
 `;
-
-const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
-  //Since this variable is capitalized, using it as a tag name will make React
-  // call `createComponent` with the value of the `tag` string prop.
-  // It is used here let us show either an `input` or `textarea` element.
-  const TagName = tag;
-  let refNode;
-
-  const cardDescInput = css`
-    min-height: 1em;
-    height: 7em;
-  `;
-
-  return (
-    <form
-    className={className}
-    onSubmit={(e) => {
-      console.log('onsubmit fired');
-      e.preventDefault();
-      saveInput(cardId, refNode.value);
-      hideInput();
-    }}>
-      <TagName placeholder={placeholder}
-      ref={node => {
-        refNode = node;
-      }}
-      defaultValue={defaultValue}
-      onBlur={(e) => {
-        e.preventDefault();
-        saveInput(cardId, refNode.value);
-        hideInput();
-      }}
-      autoFocus={true}
-      onFocus={e => {
-        //React `autocomplete` attribute places the cursor at the beginning
-        // of the input's text. This call back places the cursor at the end.
-        let val = e.target.value;
-        e.target.value = '';
-        e.target.value = val;
-      }}
-      style={{width: '100%', maxWidth: '100%'}}
-      className={tag === 'desc' ? cardDescInput : ''} />
-    </form>
-  );
-};
 
 export default Card;
 export {cardStyle};
