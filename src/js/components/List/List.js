@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
+import PropTypes from 'prop-types';
 import CardContainer from '../../containers/CardContainer';
 import {cardStyle} from '../Card/Card';
 import ListTitleInput from './ListTitleInput';
@@ -26,6 +27,7 @@ class List extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Fragment>
         <div className={`${listTitleStyle}`}>
@@ -58,6 +60,13 @@ class List extends Component {
     )
   }
 }
+
+List.propTypes = {
+  id:      PropTypes.string.isRequired,
+  name:    PropTypes.string.isRequired,
+  cardIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  boardId: PropTypes.string.isRequired,
+};
 
 const listStyle = css`
   background-color: darkgrey;

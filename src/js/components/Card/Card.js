@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
+import PropTypes from 'prop-types';
 import CardInput from './CardInput';
 
 class Card extends Component {
@@ -65,6 +66,14 @@ class Card extends Component {
   );
   }
 }
+
+Card.propTypes = {
+  id:          PropTypes.string.isRequired,
+  name:        PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  done:        PropTypes.bool.isRequired,
+  listId:      PropTypes.string.isRequired,
+};
 
 const cardTitleDescStyle = css`
   background-color: white;

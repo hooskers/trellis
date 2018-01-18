@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
   let cardNameInput, cardDescInput;
@@ -30,7 +31,7 @@ const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
       autoFocus={true}
       onFocus={e => {
         //React `autocomplete` attribute places the cursor at the beginning
-        // of the input's text. This call back places the cursor at the end.
+        // of the input's text. This callback places the cursor at the end.
         let val = e.target.value;
         e.target.value = '';
         e.target.value = val;
@@ -53,8 +54,14 @@ const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
 
       <button className='new-card-submit' type="submit">Add card</button>
     </form>
-  )
-}
+  );
+};
+
+NewCardInput.propTypes = {
+  listId:           PropTypes.string.isRequired,
+  onAddCard:        PropTypes.func.isRequired,
+  toggleVisibility: PropTypes.func.isRequired,
+};
 
 const newCardFormStyle = css`
   input.new-title {

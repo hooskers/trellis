@@ -3,9 +3,10 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import ListContainer from '../containers/ListContainer';
+import PropTypes from 'prop-types';
 import {listStyle} from './List/List';
 
-const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameBoard, match}) => {
+const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
   let input;
 
   return (
@@ -37,5 +38,13 @@ const Board = ({id, name, boardName, listIds, onAddList, onDeleteList, onRenameB
     </Fragment>
   );
 };
+
+Board.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  listIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onAddList: PropTypes.func.isRequired,
+  onRenameBoard: PropTypes.func.isRequired,
+}
 
 export default Board;

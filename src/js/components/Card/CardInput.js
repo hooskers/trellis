@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import {css} from 'emotion';
+import PropTypes from 'prop-types';
 import Card from './Card';
 
 const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput, hideInput}) => {
@@ -14,7 +15,6 @@ const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput
     <form
     className={className}
     onSubmit={(e) => {
-      console.log('onsubmit fired');
       e.preventDefault();
       saveInput(cardId, refNode.value);
       hideInput();
@@ -32,7 +32,7 @@ const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput
       autoFocus={true}
       onFocus={e => {
         //React `autocomplete` attribute places the cursor at the beginning
-        // of the input's text. This call back places the cursor at the end.
+        // of the input's text. This callback places the cursor at the end.
         let val = e.target.value;
         e.target.value = '';
         e.target.value = val;
@@ -41,6 +41,16 @@ const CardInput = ({tag, className, cardId, placeholder, defaultValue, saveInput
       className={tag === 'desc' ? cardDescInput : ''} />
     </form>
   );
+};
+
+CardInput.propTypes = {
+  tag:          PropTypes.string.isRequired,
+  className:    PropTypes.string,
+  cardId:       PropTypes.string.isRequired,
+  placeholder:  PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
+  saveInput:    PropTypes.func.isRequired,
+  hideInput:    PropTypes.func.isRequired,
 };
 
 const cardDescInput = css`
