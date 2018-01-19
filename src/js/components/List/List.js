@@ -9,6 +9,11 @@ import {cardStyle} from '../Card/Card';
 import ListTitleInput from './ListTitleInput';
 import NewCardInput from './NewCardInput';
 
+/**
+ * List component that shows cards that belong to the list.
+ * List title element turns into an input when clicked
+ * Button that adds a new card to the list
+ */
 class List extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +33,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Fragment>
         <div className={`${listTitleStyle}`}>
@@ -46,9 +50,13 @@ class List extends Component {
         </div>        
 
         {!this.state.newCardFormVisible ?
-        <span className={`${newCardButton}`} onClick={this.toggleNewCardForm}>Add new card...</span> :
-        <NewCardInput listId={this.props.id} onAddCard={this.props.onAddCard}
-        toggleVisibility={this.toggleNewCardForm}/>}
+        <span className={`${newCardButton}`} onClick={this.toggleNewCardForm}>
+          Add new card...
+        </span> :
+        <NewCardInput listId={this.props.id} 
+        onAddCard={this.props.onAddCard}
+        toggleVisibility={this.toggleNewCardForm}
+        />}
         
         {this.props.cardIds.map(cardId =>
           <div className={`card ${cardStyle}`} key={uuidv4()}>
@@ -63,12 +71,17 @@ class List extends Component {
 }
 
 List.propTypes = {
+  /** ID of list */
   id:      PropTypes.string.isRequired,
+  /** Name of the list */
   name:    PropTypes.string.isRequired,
+  /** IDs of cards that belong to this list */
   cardIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /** ID of board that the list belongs to */
   boardId: PropTypes.string.isRequired,
 };
 
+/** Styles for list component */
 const listStyle = css`
   background-color: darkgrey;
   border-radius: 5px;
@@ -79,6 +92,7 @@ const listStyle = css`
   padding: 8px;
 `;
 
+/** Styles for list title element */
 const listTitleStyle = css`
   margin-bottom: 0.25em;
 
@@ -95,6 +109,7 @@ const listTitleStyle = css`
   }
 `;
 
+/** Styles for add card button */
 const newCardButton = css`
   border-radius: 3px;
   background-color: lightgrey;

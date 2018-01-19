@@ -2,6 +2,10 @@ import React, {Component, Fragment} from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
 
+/**
+ * Input that shows when you click the list title
+ * Allows user to rename the list 
+ */
 const ListTitleInput = ({onRenameList, listId, defaultValue, hideInput}) => {
   let listNameInput;
   return (
@@ -47,9 +51,13 @@ const ListTitleInput = ({onRenameList, listId, defaultValue, hideInput}) => {
 };
 
 ListTitleInput.propTypes = {
+  /** ID of list */
   listId:       PropTypes.string.isRequired,
+  /** Value to show when showing input */
   defaultValue: PropTypes.string.isRequired,
+  /** Callback to rename the list */
   onRenameList: PropTypes.func.isRequired,
+  /** Callback to hide the input and show the title */
   hideInput:    PropTypes.func.isRequired,
 };
 

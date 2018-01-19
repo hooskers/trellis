@@ -5,6 +5,10 @@ import {Link} from 'react-router-dom';
 import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
+/**
+ * This component displays the saved boards
+ * There is an input element to add new boards
+ */
 const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => {
   //displayBoard(null);
 
@@ -43,9 +47,13 @@ const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => 
 };
 
 BoardList.propTypes = {
+  /** Object containing the boards */
   boards:           PropTypes.object.isRequired,
+  /** Callback to add a board */
   onAddBoardSubmit: PropTypes.func.isRequired,
+  /** Callback to delete a board */
   onDeleteBoard:    PropTypes.func.isRequired,
+  /** Callback to rename a board */
   onRenameBoard:    PropTypes.func.isRequired,
 };
 

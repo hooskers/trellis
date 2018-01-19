@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
 import ListContainer from '../containers/ListContainer';
 import {listStyle} from './List/List';
 
+/**
+ * This component displays a board that is in charge of the list components
+ * Contains input to rename the board
+ */
 const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
   let input;
 
@@ -41,10 +45,15 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
 };
 
 Board.propTypes = {
+  /** ID of board */
   id: PropTypes.string.isRequired,
+  /** Name of the board */
   name: PropTypes.string.isRequired,
+  /** IDs of the lists that belong to the board */
   listIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /** Callback to add list to the board */
   onAddList: PropTypes.func.isRequired,
+  /** Callback to rename board */
   onRenameBoard: PropTypes.func.isRequired,
 }
 

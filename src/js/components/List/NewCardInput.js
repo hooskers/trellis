@@ -3,6 +3,10 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import PropTypes from 'prop-types';
 
+/**
+ * This component is a form that shows in a list that allows
+ *  the user to add a new card to the list
+ */
 const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
   let cardNameInput, cardDescInput;
 
@@ -58,11 +62,15 @@ const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
 };
 
 NewCardInput.propTypes = {
+  /** ID of list */
   listId:           PropTypes.string.isRequired,
+  /** Callback to add the new card to the list */
   onAddCard:        PropTypes.func.isRequired,
+  /** Callback to show/hide the form */
   toggleVisibility: PropTypes.func.isRequired,
 };
 
+/** Styles for the form to add a new card */
 const newCardFormStyle = css`
   input.new-title {
     width: 100%;
