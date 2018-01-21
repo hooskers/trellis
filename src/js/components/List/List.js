@@ -46,7 +46,7 @@ class List extends Component {
           toggleTitleFocus={this.toggleTitleFocus}
           hideInput={this.toggleTitleFocus}
           />}
-          <span className={`list-delete ion-trash-a`} onClick={() => this.props.onDeleteList(boardId, id)}></span>
+          <span className={`list-delete ion-trash-a`} onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}></span>
         </div>        
 
         {!this.state.newCardFormVisible ?
