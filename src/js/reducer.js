@@ -43,8 +43,8 @@ const reducer = (state, action) => {
         cardIds: [],
       };
       state.boards[action.boardId].listIds = [
-        ...state.boards[action.boardId].listIds,
         newListId,
+        ...state.boards[action.boardId].listIds,
       ];
       return {...state};
     

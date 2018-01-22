@@ -12,6 +12,11 @@ const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
 
   return (
     <form className={`new-card ${newCardFormStyle}`}
+    // onBlur={(e) => {
+    //   e.preventDefault();
+
+    //   toggleVisibility();
+    // }}
     onSubmit={e => {
       e.preventDefault();
       if (!cardNameInput.value.trim()) {
@@ -40,11 +45,11 @@ const NewCardInput = ({listId, onAddCard, toggleVisibility}) => {
         e.target.value = '';
         e.target.value = val;
       }}
-      onBlur={(e) => {
-        e.preventDefault();
+      // onBlur={(e) => {
+      //   e.preventDefault();
 
-        toggleVisibility();
-      }}
+      //   toggleVisibility();
+      // }}
       ref={node => {
         cardNameInput = node;
       }} />

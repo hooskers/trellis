@@ -13,8 +13,9 @@ import reducer from './reducer';
 import initialState from './initialState';
 
 const style = css`
-  color: blue;
-  background-color: green;
+  overflow-x: auto;
+  min-height: 100vh;
+  max-height: 100vh;
 `;
 
 const loadState = () => {

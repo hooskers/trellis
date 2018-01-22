@@ -88,8 +88,10 @@ const listStyle = css`
   box-shadow: 0px 0px 3px 1px #0000005c;
   display: flex;
   flex-direction: column;
+  min-width: 15vw;
   width: 15vw;
   padding: 8px;
+  margin-left: 15px;
 `;
 
 /** Styles for list title element */

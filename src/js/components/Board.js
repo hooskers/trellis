@@ -16,26 +16,28 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
 
   return (
     <Fragment>
-      <div>Board ID: {id}</div>
-      <div>Board Name: {name}</div>
+      <div id="board-header" className={`${boardHeaderStyle}`}>
+        <div>Board ID: {id}</div>
+        <div>Board Name: {name}</div>
 
-      <form onSubmit={e => {
-        e.preventDefault();
-        if (!input.value.trim()) {
-          return;
-        }
+        <form onSubmit={e => {
+          e.preventDefault();
+          if (!input.value.trim()) {
+            return;
+          }
 
-        onAddList(id, input.value.trim());
-        input.value='';
-      }}>
-        <input placeholder="New list name"
-          ref={node => {
-            input = node;
-        }} />
-        <button type="submit">Add list</button>
-      </form>
+          onAddList(id, input.value.trim());
+          input.value='';
+        }}>
+          <input placeholder="New list name"
+            ref={node => {
+              input = node;
+          }} />
+          <button type="submit">Add list</button>
+        </form>
+      </div>
       
-      <div id={'lists'}>
+      <div id="lists" className={`${listsStyle}`}>
         {listIds.map(listId => (
           <div className={`list ${listStyle}`} key={uuidv4()}>
             <ListContainer boardId={id} listId={listId}/>
@@ -58,5 +60,16 @@ Board.propTypes = {
   /** Callback to rename board */
   onRenameBoard: PropTypes.func.isRequired,
 }
+
+const boardHeaderStyle = css`
+  display: inline-block;
+  position: sticky;
+  left: 15px;
+  margin-top: 10px;
+`;
+
+const listsStyle = css`
+  display: flex;
+`;
 
 export default Board;
