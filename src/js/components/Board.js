@@ -35,11 +35,13 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
         <button type="submit">Add list</button>
       </form>
       
-      {listIds.map(listId => (
-        <div className={`list ${listStyle}`} key={uuidv4()}>
-          <ListContainer boardId={id} listId={listId}/>
-        </div>
-      ))}
+      <div id={'lists'}>
+        {listIds.map(listId => (
+          <div className={`list ${listStyle}`} key={uuidv4()}>
+            <ListContainer boardId={id} listId={listId}/>
+          </div>
+        ))}
+      </div>
     </Fragment>
   );
 };

@@ -9,12 +9,11 @@ import PropTypes from 'prop-types';
  * This component displays the saved boards
  * There is an input element to add new boards
  */
-const BoardList = ({boards, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => {
+const BoardList = ({boards, id, onAddBoardSubmit, onDeleteBoard, onRenameBoard}) => {
   //displayBoard(null);
 
   let input;
-  console.log(boards);
-
+  
   return (
     <Fragment>
       <form onSubmit={e => {

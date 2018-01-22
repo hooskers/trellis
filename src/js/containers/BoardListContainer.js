@@ -8,6 +8,7 @@ import BoardList from '../components/BoardList';
 
 const mapStateToProps = (state) => ({
   boards: state.boards,
+  ...state.boards,
 });
 
 const mapDispatchToProps = {

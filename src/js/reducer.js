@@ -7,9 +7,11 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case 'ADD_BOARD':
-            state.boards[uuidv4()] = {
+            let newBoardId = uuidv4();
+            state.boards[newBoardId] = {
+                id: newBoardId,
                 name: action.boardName,
-                lists: [],
+                listIds: [],
             };
             return {...state}
 
