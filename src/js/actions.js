@@ -1,6 +1,7 @@
-export const addBoard = (boardName) => {
+export const addBoard = (boardId, boardName) => {
   return {
     type: 'ADD_BOARD',
+    boardId,
     boardName,
   }
 };

@@ -13,7 +13,7 @@ const BoardList = ({boards, id, onAddBoardSubmit, onDeleteBoard, onRenameBoard})
   //displayBoard(null);
 
   let input;
-  
+
   return (
     <Fragment>
       <form onSubmit={e => {
@@ -22,7 +22,7 @@ const BoardList = ({boards, id, onAddBoardSubmit, onDeleteBoard, onRenameBoard})
           return;
         }
 
-        onAddBoardSubmit(input.value.trim());
+        onAddBoardSubmit(uuidv4(), input.value.trim());
         input.value = '';
       }}>
         <input placeholder="New board name"

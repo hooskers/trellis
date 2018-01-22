@@ -1,15 +1,21 @@
 import uuidv4 from 'uuid/v4';
+import initialState from './initialState';
 
+//TODO: The uuidv4() calls make these impure.
+// Pass the IDs through the action calls
 const reducer = (state, action) => {
   console.log(`action: ${action.type}`);
+
+  if (!state) {
+    return initialState;
+  }
   
   let boardIndex, listIndex, cardIndex;
   
   switch (action.type) {
     case 'ADD_BOARD':
-      let newBoardId = uuidv4();
-      state.boards[newBoardId] = {
-        id: newBoardId,
+      state.boards[action.boardId] = {
+        id: action.boardId,
         name: action.boardName,
         listIds: [],
       };
