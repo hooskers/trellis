@@ -100,7 +100,6 @@ const listStyle = css`
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;
-    min-height: 100%;
     overflow-y: scroll;
   }
 `;
