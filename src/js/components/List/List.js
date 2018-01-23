@@ -84,7 +84,7 @@ List.propTypes = {
 
 /** Styles for list component */
 const listStyle = css`
-  background-color: darkgrey;
+  background-color: #d0d0d0;
   border-radius: 5px;
   box-shadow: 0px 0px 3px 1px #0000005c;
   display: flex;
@@ -96,7 +96,7 @@ const listStyle = css`
   margin-right: 7px;
   overflow-y: auto;
   height: min-content;
-  max-height: 85vh;
+  max-height: 95%;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;

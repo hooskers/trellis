@@ -15,7 +15,7 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
   let input;
 
   return (
-    <Fragment>
+    <div id="board-container" className={`${boardContainerStyle}`}>
       <div id="board-header" className={`${boardHeaderStyle}`}>
         <div id="board-info">
           {/* <div>Board ID: {id}</div> */}
@@ -46,7 +46,7 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
           </div>
         ))}
       </div>
-    </Fragment>
+    </div>
   );
 };
 
@@ -63,7 +63,19 @@ Board.propTypes = {
   onRenameBoard: PropTypes.func.isRequired,
 }
 
+const boardContainerStyle = css`
+  background-color: whitesmoke;
+  min-height: 100vh;
+  max-height: 100vh;
+  max-width: fit-content;
+  display: grid
+  grid-template-rows: 7vh 93vh;
+  grid-template-columns: 100vw;
+  overflow: hidden;
+`;
+
 const boardHeaderStyle = css`
+  background-color: white;
   position: sticky;
   left: 0px;
   padding-left: 15px;
@@ -79,6 +91,7 @@ const listsStyle = css`
   overflow-x: auto;
   overflow-y: hidden;
   align-items: flex-start;
+  height: 91vh;
 `;
 
 export default Board;

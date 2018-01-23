@@ -96,7 +96,7 @@ Card.propTypes = {
 
 /** Common styles shared between the card's title and description elements */
 const cardTitleDescStyle = css`
-  background-color: white;
+  background-color: whitesmoke;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   padding-left: 7px;
@@ -156,7 +156,7 @@ const cardBackgroundStyle = css`
   border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: lightgray;
+  background-color: whitesmoke;
   padding: 5px;
   box-shadow: #00000061 2px 3px 7px 0px
 `;
