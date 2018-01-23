@@ -5,7 +5,7 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import CardContainer from '../../containers/CardContainer';
-import {cardStyle} from '../Card/Card';
+import {cardStyle, cardBackgroundStyle} from '../Card/Card';
 import ListTitleInput from './ListTitleInput';
 import NewCardInput from './NewCardInput';
 
@@ -53,7 +53,8 @@ class List extends Component {
         <span className={`${newCardButton}`} onClick={this.toggleNewCardForm}>
           Add new card...
         </span> :
-        <NewCardInput listId={this.props.id} 
+        <NewCardInput className={`${cardBackgroundStyle}`}
+        listId={this.props.id} 
         onAddCard={this.props.onAddCard}
         toggleVisibility={this.toggleNewCardForm}
         />}
@@ -113,8 +114,8 @@ const listTitleStyle = css`
 
 /** Styles for add card button */
 const newCardButton = css`
-  border-radius: 3px;
-  background-color: lightgrey;
+  ${cardBackgroundStyle}
+  box-shadow: none;
   cursor: pointer;
   padding-left: 8px;
   padding-top: 4px;

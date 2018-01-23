@@ -150,18 +150,24 @@ const deleteStyle = css`
   }
 `;
 
-/** Styles for the card component */
-const cardStyle = css`
+
+/** Styles for the background card component */
+const cardBackgroundStyle = css`
   border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   background-color: lightgray;
   padding: 5px;
-  display: grid;
-  grid-template-columns: 10fr 80fr 10fr;
-  grid-template-rows: 2em auto 1em;
   box-shadow: #00000061 2px 3px 7px 0px
 `;
 
+/** Styles for the card component */
+const cardStyle = css`
+  ${cardBackgroundStyle}
+  display: grid;
+  grid-template-columns: 10fr 80fr 10fr;
+  grid-template-rows: 2em auto 1em;
+`;
+
 export default Card;
-export {cardStyle};
+export {cardStyle, cardBackgroundStyle};
