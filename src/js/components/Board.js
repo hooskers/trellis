@@ -18,8 +18,8 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
     <Fragment>
       <div id="board-header" className={`${boardHeaderStyle}`}>
         <div id="board-info">
-          <div>Board ID: {id}</div>
-          <div>Board Name: {name}</div>
+          {/* <div>Board ID: {id}</div> */}
+          <div>{name}</div>
 
           <form onSubmit={e => {
             e.preventDefault();
@@ -67,8 +67,7 @@ const boardHeaderStyle = css`
   position: sticky;
   left: 0px;
   padding-left: 15px;
-  padding-top: 10px;
-  margin-bottom: 20px;
+  padding-top: 7px;
   box-shadow: 0px 1px 7px 3px #0000001f;
 `;
 
@@ -76,8 +75,10 @@ const listsStyle = css`
   display: flex;
   margin-left: 7px;
   margin-right: 7px;
+  padding-top: 15px;
   overflow-x: auto;
   overflow-y: hidden;
+  align-items: flex-start;
 `;
 
 export default Board;
