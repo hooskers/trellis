@@ -92,7 +92,14 @@ const listStyle = css`
   min-width: 15vw;
   width: 15vw;
   padding: 8px;
-  margin-left: 15px;
+  margin-left: 7px;
+  margin-right: 7px;
+  overflow-y: auto;
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    min-width: 85vw;
+    min-height: 100%;
+  }
 `;
 
 /** Styles for list title element */

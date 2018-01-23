@@ -17,24 +17,26 @@ const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
   return (
     <Fragment>
       <div id="board-header" className={`${boardHeaderStyle}`}>
-        <div>Board ID: {id}</div>
-        <div>Board Name: {name}</div>
+        <div id="board-info">
+          <div>Board ID: {id}</div>
+          <div>Board Name: {name}</div>
 
-        <form onSubmit={e => {
-          e.preventDefault();
-          if (!input.value.trim()) {
-            return;
-          }
+          <form onSubmit={e => {
+            e.preventDefault();
+            if (!input.value.trim()) {
+              return;
+            }
 
-          onAddList(id, input.value.trim());
-          input.value='';
-        }}>
-          <input placeholder="New list name"
-            ref={node => {
-              input = node;
-          }} />
-          <button type="submit">Add list</button>
-        </form>
+            onAddList(id, input.value.trim());
+            input.value='';
+          }}>
+            <input placeholder="New list name"
+              ref={node => {
+                input = node;
+            }} />
+            <button type="submit">Add list</button>
+          </form>
+        </div>
       </div>
       
       <div id="lists" className={`${listsStyle}`}>
@@ -62,14 +64,20 @@ Board.propTypes = {
 }
 
 const boardHeaderStyle = css`
-  display: inline-block;
   position: sticky;
-  left: 15px;
-  margin-top: 10px;
+  left: 0px;
+  padding-left: 15px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 1px 7px 3px #0000001f;
 `;
 
 const listsStyle = css`
   display: flex;
+  margin-left: 7px;
+  margin-right: 7px;
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
 
 export default Board;
