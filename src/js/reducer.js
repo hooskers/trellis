@@ -104,6 +104,13 @@ const reducer = (state, action) => {
         description: action.cardDescription,
       }
       return {...state};
+
+    case 'DONE_CARD':
+      state.cards[action.cardId] = {
+        ...state.cards[action.cardId],
+        done: !state.cards[action.cardId].done,
+      }
+      return {...state};
     
     default:
       return state;
