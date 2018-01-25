@@ -5,7 +5,7 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import CardContainer from '../../containers/CardContainer';
-import {cardStyle, cardBackgroundStyle} from '../Card/Card';
+import {cardBackgroundStyle} from '../Card/Card';
 import ListTitleInput from './ListTitleInput';
 import NewCardInput from './NewCardInput';
 
@@ -34,7 +34,7 @@ class List extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className={`list ${listStyle}`}>
         <div className={`${listTitleStyle}`}>
           {!this.state.listTitleFocused ? 
           <span className='list-title' onClick={this.toggleTitleFocus}>
@@ -64,7 +64,7 @@ class List extends Component {
             <CardContainer listId={this.props.id} cardId={cardId} />
           </Fragment>
         )}
-      </Fragment>
+      </div>
     )
   }
 }
@@ -131,4 +131,3 @@ const newCardButton = css`
 `;
 
 export default List;
-export {listStyle};

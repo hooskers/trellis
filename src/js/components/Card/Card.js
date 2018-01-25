@@ -102,7 +102,7 @@ Card.propTypes = {
 
 /** Common styles shared between the card's title and description elements */
 const cardTitleDescStyle = css`
-  background-color: whitesmoke;
+  background-color: #0000;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   padding-left: 7px;
@@ -166,7 +166,7 @@ const cardBackgroundStyle = css`
   margin-bottom: 5px;
   background-color: whitesmoke;
   padding: 5px;
-  box-shadow: #00000061 2px 3px 7px 0px
+  box-shadow: #00000061 2px 3px 7px 0px;
 `;
 
 /** Styles for the card component */
@@ -175,6 +175,7 @@ const cardStyle = css`
   display: grid;
   grid-template-columns: 10fr 80fr 10fr;
   grid-template-rows: 2em auto 1em;
+  flex: 1 0 auto;
   border-left: 4px solid #0000;
   border-right: 4px solid #0000;
 
@@ -185,4 +186,4 @@ const cardStyle = css`
 `;
 
 export default Card;
-export {cardStyle, cardBackgroundStyle};
+export {cardBackgroundStyle};

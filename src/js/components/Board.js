@@ -5,7 +5,6 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import ListContainer from '../containers/ListContainer';
-import {listStyle} from './List/List';
 
 /**
  * This component displays a board that is in charge of the list components
@@ -76,9 +75,9 @@ class Board extends Component {
         
         <div id="lists" className={`${listsStyle}`}>
           {this.props.listIds.map(listId => (
-            <div className={`list ${listStyle}`} key={listId}>
+            <Fragment key={listId}>
               <ListContainer boardId={this.props.id} listId={listId}/>
-            </div>
+            </Fragment>
           ))}
         </div>
       </div>
