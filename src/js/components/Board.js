@@ -11,43 +11,72 @@ import {listStyle} from './List/List';
  * This component displays a board that is in charge of the list components
  * Contains input to rename the board
  */
-const Board = ({id, name, listIds, onAddList, onRenameBoard}) => {
-  let input;
+class Board extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div id="board-container" className={`${boardContainerStyle}`}>
-      <div id="board-header" className={`${boardHeaderStyle}`}>
-        <div id="board-info">
-          {/* <div>Board ID: {id}</div> */}
-          <div>{name}</div>
+    this.state = {
+      showNewListInput: false,
+    }
+  }
 
-          <form onSubmit={e => {
-            e.preventDefault();
-            if (!input.value.trim()) {
-              return;
-            }
+  toggleNewListInput = () => {
+    this.setState({showNewListInput: !this.state.showNewListInput});
+  }
 
-            onAddList(id, input.value.trim());
-            input.value='';
-          }}>
-            <input placeholder="New list name"
-              ref={node => {
-                input = node;
-            }} />
-            <button type="submit">Add list</button>
-          </form>
+  render() {
+    let input;
+  
+    return (
+      <div id="board-container" className={`${boardContainerStyle}`}>
+        <div id="board-header" className={`${boardHeaderStyle}`}>
+            {/* <div>Board ID: {id}</div> */}
+            <span id="board-title" className={`${boardTitleStyle}`}>{this.props.name}</span>
+            <span id="add-list-btn" className={`${addListBtnStyle}`} onClick={e => {
+              if (input && input.value.trim()) {
+                this.props.onAddList(this.props.id, input.value.trim())
+                input.value='';
+              }
+              
+              this.toggleNewListInput();
+            }}>
+              {this.state.showNewListInput &&
+                <form id="new-list-form" onSubmit={e => {
+                  e.preventDefault();
+                  if (!input.value.trim()) {
+                    return;
+                  }
+      
+                  this.props.onAddList(this.props.id, input.value.trim());
+                  input.value='';
+
+                  this.toggleNewListInput();
+                }}>
+                  <input placeholder="New list name"
+                    ref={node => {
+                      input = node;
+                  }}
+                  onClick={e => {e.stopPropagation()}} />
+                  {/* <button type="submit">Add list</button> */}
+                </form>
+              }
+
+              {!this.state.showNewListInput && <span className="text">New list</span>}
+              {this.state.showNewListInput && <span className="text">Add list</span>}
+              <span className="icon ion-plus-round"></span>
+            </span>
+        </div>
+        
+        <div id="lists" className={`${listsStyle}`}>
+          {this.props.listIds.map(listId => (
+            <div className={`list ${listStyle}`} key={uuidv4()}>
+              <ListContainer boardId={this.props.id} listId={listId}/>
+            </div>
+          ))}
         </div>
       </div>
-      
-      <div id="lists" className={`${listsStyle}`}>
-        {listIds.map(listId => (
-          <div className={`list ${listStyle}`} key={uuidv4()}>
-            <ListContainer boardId={id} listId={listId}/>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 Board.propTypes = {
@@ -75,12 +104,36 @@ const boardContainerStyle = css`
 `;
 
 const boardHeaderStyle = css`
+  display: flex;
+  align-items: center;
   background-color: white;
   position: sticky;
   left: 0px;
   padding-left: 15px;
+  padding-right: 15px;
   padding-top: 7px;
   box-shadow: 0px 1px 7px 3px #0000001f;
+`;
+
+const boardTitleStyle = css`
+  font-size: 2em;
+  float: left;
+`;
+
+const addListBtnStyle = css`
+  margin-left: auto;
+  font-size: 1.15em;
+  cursor: pointer;
+
+  .text {
+    margin-right: 8px;
+  }
+
+  #new-list-form {
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
 `;
 
 const listsStyle = css`
