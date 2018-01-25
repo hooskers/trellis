@@ -33,7 +33,7 @@ const BoardList = ({boards, id, onAddBoardSubmit, onDeleteBoard, onRenameBoard})
       </form>
 
       {Object.values(boards).map(board => 
-        <div key={uuidv4()}>
+        <div key={board.id}>
           <Link to={'board/'+board.id}>
             {board.name}
             <br />

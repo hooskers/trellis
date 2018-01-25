@@ -43,7 +43,7 @@ class Card extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className={`card ${cardStyle} ${this.props.done ? 'done' : ''}`}>
         {
           //If the title input was clicked, show the title input
           //Otherwise, just show the title text
@@ -57,7 +57,10 @@ class Card extends Component {
           saveInput={this.props.onSaveCardName}
           hideInput={this.hideNameInput} 
           /> :
-          <div className={`${titleStyle}`} onClick={this.showNameInput}>{this.props.name}</div>
+          <div className={`${titleStyle}`}
+          onClick={this.showNameInput}>
+            {this.props.name}
+          </div>
         }
         {
           //If the description input was clicked, show the description input
@@ -72,11 +75,14 @@ class Card extends Component {
           saveInput={this.props.onSaveCardDescription}
           hideInput={this.hideDescInput} 
           /> :
-          <div className={descriptionStyle} onClick={this.showDescInput}>{this.props.description}</div>
+          <div className={`${descriptionStyle}`}
+          onClick={this.showDescInput}>{
+            this.props.description}
+          </div>
         }
         <span className={`${doneStyle} ion-checkmark`} onClick={() => this.props.onDoneCard(this.props.listId, this.props.id)}></span>
         <span className={`delete-card ${deleteStyle} ion-trash-a`} onClick={() => this.props.onDeleteCard(this.props.listId, this.props.id)}></span>
-      </Fragment>
+      </div>
   );
   }
 }
@@ -104,6 +110,8 @@ const cardTitleDescStyle = css`
   margin-top: 0.25em;
   margin-bottom: 0.25em;
   border-radius: 3px;
+  border-left: 4px solid #0000;
+  border-right: 4px solid #0000;
 `;
 
 /** Styles for card's title element */
@@ -167,6 +175,13 @@ const cardStyle = css`
   display: grid;
   grid-template-columns: 10fr 80fr 10fr;
   grid-template-rows: 2em auto 1em;
+  border-left: 4px solid #0000;
+  border-right: 4px solid #0000;
+
+  &.done {
+    border-left: 4px solid mediumseagreen;
+    text-decoration: line-through;
+  }
 `;
 
 export default Card;

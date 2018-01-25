@@ -60,11 +60,9 @@ class List extends Component {
         />}
         
         {this.props.cardIds.map(cardId =>
-          <div className={`card ${cardStyle}`} key={uuidv4()}>
+          <Fragment key={cardId}>
             <CardContainer listId={this.props.id} cardId={cardId} />
-            <br />
-            <br />
-          </div>
+          </Fragment>
         )}
       </Fragment>
     )
