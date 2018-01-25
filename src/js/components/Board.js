@@ -69,14 +69,14 @@ class Board extends Component {
                 {/* <button type="submit">Add list</button> */}
               </form>
 
-              {!this.state.showNewListInput && <span className="text">New list</span>}
+              {/* <span className="text">New list</span> */}
               <span className="icon ion-plus-round"></span>
             </span>
         </div>
         
         <div id="lists" className={`${listsStyle}`}>
           {this.props.listIds.map(listId => (
-            <div className={`list ${listStyle}`} key={uuidv4()}>
+            <div className={`list ${listStyle}`} key={listId}>
               <ListContainer boardId={this.props.id} listId={listId}/>
             </div>
           ))}
@@ -144,7 +144,10 @@ const addListBtnStyle = css`
   }
 
   &.new-list-form-open {
-    width: 100%;
+    width: 33%;
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      width: 100%
+    }
   }
 
   .text {
@@ -155,7 +158,7 @@ const addListBtnStyle = css`
   }
 
   .icon {
-    transition: transform 0.5s ease;
+    transition: transform 0.25s ease;
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       margin: auto 25px auto 25px;
@@ -185,16 +188,16 @@ const addListBtnStyle = css`
     padding-left: 0px;
     margin-left: auto;
     margin-right: 0px;
-    transition: visibility 0s linear 0s, width 0.5s ease;
+    transition: visibility 0s linear 0s, width 0.25s ease;
 
     &.closed {
       width: 0%;
       visibility: hidden;
-      transition-delay: 0.5s, 0s;
+      transition-delay: 0.25s, 0s;
     }
 
     &.open {
-      width: 25%;
+      width: 100%;
       visibility: visible;
     }
 
@@ -207,10 +210,6 @@ const addListBtnStyle = css`
       margin-left: auto;
     }
 
-    &.closed input {
-      border: none;
-    }
-
     input {
       font-size: 1em;
       width: 100%;
@@ -219,6 +218,10 @@ const addListBtnStyle = css`
       border-bottom: none;
       border-left: 1px solid #0000001a;
       border-top: none;
+    }
+
+    &.closed input {
+      border: none;
     }
   }
 `;
