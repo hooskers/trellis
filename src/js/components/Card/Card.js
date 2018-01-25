@@ -143,7 +143,7 @@ const doneStyle = css`
   justify-self: start;
   cursor: pointer;
   &:hover {
-    color: green;
+    color: mediumseagreen;
   }
 `;
 
