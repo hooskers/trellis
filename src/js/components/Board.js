@@ -236,6 +236,10 @@ const listsStyle = css`
   overflow-y: hidden;
   align-items: flex-start;
   height: calc(100vh - 60px);
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    font-size: 1.5em;
+  }
 `;
 
 export default Board;
