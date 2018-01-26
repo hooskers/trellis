@@ -93,8 +93,7 @@ const listStyle = css`
   margin-left: 7px;
   margin-right: 7px;
   overflow-y: auto;
-  height: min-content;
-  max-height: 95%;
+  max-height: 96%;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;

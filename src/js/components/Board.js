@@ -28,7 +28,8 @@ class Board extends Component {
     let input;
   
     return (
-      <div id="board-container" className={`${boardContainerStyle}`}>
+      //<div id="board-container" className={`${boardContainerStyle}`}>
+      <Fragment>
         <div id="board-header" className={`${boardHeaderStyle}`}>
             {/* <div>Board ID: {id}</div> */}
             <span id="board-title" className={`${boardTitleStyle}`}>{this.props.name}</span>
@@ -80,7 +81,7 @@ class Board extends Component {
             </Fragment>
           ))}
         </div>
-      </div>
+      </Fragment>
     );
   }
 };
@@ -117,9 +118,10 @@ const boardHeaderStyle = css`
   left: 0px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
   box-shadow: 0px 1px 7px 3px #0000001f;
+  height: 40px;
 `;
 
 const boardTitleStyle = css`
@@ -233,7 +235,7 @@ const listsStyle = css`
   overflow-x: auto;
   overflow-y: hidden;
   align-items: flex-start;
-  height: 91vh;
+  height: calc(100vh - 60px);
 `;
 
 export default Board;
