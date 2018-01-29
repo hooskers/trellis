@@ -5,6 +5,7 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import ListContainer from '../containers/ListContainer';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
 /**
  * This component displays a board that is in charge of the list components
@@ -24,14 +25,18 @@ class Board extends Component {
     this.setState({showNewListInput: !this.state.showNewListInput});
   }
 
+  dragEnd = (result) => {
+    // If the list was dragged and dropped in its orignal place, do nothing
+    if (!result.destination) return;
+    this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
+  }
+
   render() {
     let input;
   
     return (
-      //<div id="board-container" className={`${boardContainerStyle}`}>
       <Fragment>
         <div id="board-header" className={`${boardHeaderStyle}`}>
-            {/* <div>Board ID: {id}</div> */}
             <span id="board-title" className={`${boardTitleStyle}`}>{this.props.name}</span>
             <span id="add-list-btn"
             className={`${addListBtnStyle}
@@ -60,6 +65,7 @@ class Board extends Component {
                 this.toggleNewListInput();
               }}>
                 <input placeholder="New list name"
+                autoFocus={true}
                 ref={node => {
                   input = node;
                 }}
@@ -74,13 +80,27 @@ class Board extends Component {
             </span>
         </div>
         
-        <div id="lists" className={`${listsStyle}`}>
-          {this.props.listIds.map(listId => (
-            <Fragment key={listId}>
-              <ListContainer boardId={this.props.id} listId={listId}/>
-            </Fragment>
-          ))}
-        </div>
+        <DragDropContext onDragEnd={this.dragEnd}>
+          <Droppable droppableId="lists" direction="horizontal">
+            {(provided, snapshot) => (
+              <div id="lists" className={`${listsStyle}`} ref={provided.innerRef}>
+                {this.props.listIds.map((listId, index) => (
+                  <Draggable key={listId} index={index} draggableId={listId}>
+                    {(provided, snapshot) => (
+                      <div>
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <ListContainer boardId={this.props.id} listId={listId}/>
+                        </div>
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+            </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </Fragment>
     );
   }

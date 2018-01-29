@@ -24,13 +24,14 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "test":  "jest",
+    "test": "jest",
     "test:watch": "jest --watch"
   },
   "dependencies": {
     "babel-plugin-emotion": "^8.0.12",
     "emotion": "^8.0.12",
     "react": "^16.2.0",
+    "react-beautiful-dnd": "^4.0.1",
     "react-dom": "^16.2.0",
     "react-emotion": "^8.0.12",
     "react-redux": "^5.0.6",

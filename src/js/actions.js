@@ -52,6 +52,15 @@ export const renameList = (listId, listName) => {
   }
 };
 
+export const rearrangeList = (boardId, sourceIndex, destinationIndex) => {
+  return {
+    type: 'REARRANGE_LIST',
+    boardId,
+    sourceIndex,
+    destinationIndex,
+  }
+};
+
 export const addCard = (listId, cardName, cardDescription) => {
   return {
     type: 'ADD_CARD',

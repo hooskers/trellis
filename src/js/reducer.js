@@ -34,6 +34,15 @@ const reducer = (state, action) => {
     case 'RENAME_BOARD':
       state.boards[action.boardId].name = action.boardName;
       return {...state};
+
+    case 'REARRANGE_LIST':
+      let rlTemp;
+
+      rlTemp = state.boards[action.boardId].listIds.slice(action.sourceIndex, action.sourceIndex + 1)[0];
+      state.boards[action.boardId].listIds.splice(action.sourceIndex, 1);
+      state.boards[action.boardId].listIds.splice(action.destinationIndex, 0, rlTemp);
+
+      return {...state};
     
     case 'ADD_LIST':
       let newListId = uuidv4();

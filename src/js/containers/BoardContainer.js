@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import {connect} from 'react-redux';
 
-import {addList, renameBoard, displayBoard} from '../actions.js';
+import {addList, rearrangeList, renameBoard, displayBoard} from '../actions.js';
 import Board from '../components/Board';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -14,6 +14,7 @@ const mapDispatchToProps = {
   onAddList: addList,
   onRenameBoard: renameBoard,
   onDisplayBoard: displayBoard,
+  onRearrangeList: rearrangeList,
 };
 
 const BoardContainer = connect(
