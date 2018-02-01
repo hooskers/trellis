@@ -110,3 +110,13 @@ export const doneCard = (listId, cardId) => {
     cardId,
   }
 };
+
+export const rearrangeCard = (sourceList, destList, sourceIndex, destIndex) => {
+  return {
+    type: 'REARRANGE_CARD',
+    sourceList,
+    destList,
+    sourceIndex,
+    destIndex,
+  }
+};

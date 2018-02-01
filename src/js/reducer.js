@@ -120,6 +120,17 @@ const reducer = (state, action) => {
         done: !state.cards[action.cardId].done,
       }
       return {...state};
+
+    case 'REARRANGE_CARD':
+      let rcTemp;
+
+      rcTemp = state.lists[action.sourceList].cardIds.splice(action.sourceIndex, 1)[0];
+      state.lists[action.destList].cardIds.splice(action.destIndex, 0, rcTemp);
+
+      state.lists[action.sourceList].cardIds = [...state.lists[action.sourceList].cardIds];
+      state.lists[action.destList].cardIds = [...state.lists[action.destList].cardIds];
+
+      return {...state};
     
     default:
       return state;

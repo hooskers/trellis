@@ -3,9 +3,9 @@ import {render} from 'react-dom';
 import {css} from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
 import ListContainer from '../containers/ListContainer';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
 /**
  * This component displays a board that is in charge of the list components
@@ -28,7 +28,16 @@ class Board extends Component {
   dragEnd = (result) => {
     // If the list was dragged and dropped in its orignal place, do nothing
     if (!result.destination) return;
-    this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
+
+    console.log(result);
+    if (result.type === "LIST") {
+      this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
+    }
+
+    if (result.type === "CARD") {
+      console.log('rearrange the cards, please');
+      this.props.onRearrangeCard(result.source.droppableId, result.destination.droppableId, result.source.index, result.destination.index);
+    }
   }
 
   render() {
@@ -72,31 +81,26 @@ class Board extends Component {
                 onClick={e => {e.stopPropagation()}}
                 onChange={e => this.setState({newListValue: input.value.trim()})}
                 />
-                {/* <button type="submit">Add list</button> */}
               </form>
 
-              {/* <span className="text">New list</span> */}
               <span className="icon ion-plus-round"></span>
             </span>
         </div>
         
         <DragDropContext onDragEnd={this.dragEnd}>
-          <Droppable droppableId="lists" direction="horizontal">
+          <Droppable droppableId="lists" direction="horizontal" type="LIST">
             {(provided, snapshot) => (
               <div id="lists" className={`${listsStyle}`} ref={provided.innerRef}>
                 {this.props.listIds.map((listId, index) => (
-                  <Draggable key={listId} index={index} draggableId={listId}>
+                  <Draggable key={listId} index={index} draggableId={listId} type="LIST">
                     {(provided, snapshot) => (
                       <div>
-                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          <ListContainer boardId={this.props.id} listId={listId}/>
-                        </div>
+                        <ListContainer provided={provided} boardId={this.props.id} listId={listId}/>
                         {provided.placeholder}
                       </div>
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
             </div>
             )}
           </Droppable>

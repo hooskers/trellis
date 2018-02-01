@@ -43,7 +43,11 @@ class Card extends Component {
 
   render() {
     return (
-      <div className={`card ${cardStyle} ${this.props.done ? 'done' : ''}`}>
+      <div className={`card ${cardStyle} ${this.props.done ? 'done' : ''}`}
+      ref={this.props.provided.innerRef}
+      {...this.props.provided.draggableProps}
+      {...this.props.provided.dragHandleProps}
+      >
         {
           //If the title input was clicked, show the title input
           //Otherwise, just show the title text
