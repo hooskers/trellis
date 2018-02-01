@@ -123,6 +123,10 @@ const listStyle = css`
     min-width: 85vw;
     overflow-y: scroll;
   }
+
+  .cards {
+    min-height: 20px;
+  }
 `;
 
 /** Styles for list title element */
