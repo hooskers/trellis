@@ -18,17 +18,15 @@ module.exports = {
         {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            use: [
-                'babel-loader',
-            ],
+            use: ['babel-loader', 'eslint-loader'],
         },
     ],
-},
-resolve: {
+  },
+  resolve: {
     extensions: ['.js', '.jsx'],
-},
+  },
   output: {
     filename: 'app.bundle.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
 };
