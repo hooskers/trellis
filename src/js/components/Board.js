@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from 'react';
-import {render} from 'react-dom';
-import {css} from 'react-emotion';
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
+import { css } from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../containers/ListContainer';
 
@@ -11,6 +11,7 @@ import ListContainer from '../containers/ListContainer';
  * This component displays a board that is in charge of the list components
  * Contains input to rename the board
  */
+
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +19,25 @@ class Board extends Component {
     this.state = {
       showNewListInput: false,
       newListValue: '',
+    };
+
+    this.newListInput = null;
+  }
+
+  componentDidUpdate() {
+    if (this.newListInput && this.state.showNewListInput) {
+      this.newListInput.focus();
+    } else if (this.newListInput && !this.state.showNewListInput) {
+      this.newListInput.blur();
     }
   }
 
   toggleNewListInput = () => {
-    this.setState({showNewListInput: !this.state.showNewListInput});
+    if (this.state.showNewListInput) {
+      this.setState({ newListValue: '' });
+    }
+
+    this.setState({ showNewListInput: !this.state.showNewListInput });
   }
 
   dragEnd = (result) => {
@@ -30,19 +45,18 @@ class Board extends Component {
     if (!result.destination) return;
 
     console.log(result);
-    if (result.type === "LIST") {
+    if (result.type === 'LIST') {
       this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
     }
 
-    if (result.type === "CARD") {
+    if (result.type === 'CARD') {
       console.log('rearrange the cards, please');
       this.props.onRearrangeCard(result.source.droppableId, result.destination.droppableId, result.source.index, result.destination.index);
     }
   }
-
   render() {
     let input;
-  
+
     return (
       <Fragment>
         <div id="board-header" className={`${boardHeaderStyle}`}>
@@ -51,42 +65,42 @@ class Board extends Component {
             className={`${addListBtnStyle}
               ${this.state.showNewListInput ? 'new-list-form-open' : ''}
               ${!this.state.newListValue ? 'new-list-form-empty' : ''}
-            `} 
+            `}
             onClick={e => {
-              if (input && input.value.trim()) {
-                this.props.onAddList(this.props.id, input.value.trim())
-                input.value='';
+              if (this.newListInput && this.newListInput.value.trim()) {
+                this.props.onAddList(this.props.id, this.newListInput.value.trim())
+                this.newListInput.value='';
               }
-              
+
               this.toggleNewListInput();
             }}>
               <form id="new-list-form"
               className={`${this.state.showNewListInput ? 'open' : 'closed'}`}
               onSubmit={e => {
                 e.preventDefault();
-                if (!input.value.trim()) {
+                if (!this.newListInput.value.trim()) {
                   return;
                 }
-    
-                this.props.onAddList(this.props.id, input.value.trim());
-                input.value='';
+
+                this.props.onAddList(this.props.id, this.newListInput.value.trim());
+                this.newListInput.value='';
 
                 this.toggleNewListInput();
               }}>
                 <input placeholder="New list name"
                 autoFocus={true}
                 ref={node => {
-                  input = node;
+                  this.newListInput = node;
                 }}
                 onClick={e => {e.stopPropagation()}}
-                onChange={e => this.setState({newListValue: input.value.trim()})}
+                onChange={e => this.setState({newListValue: this.newListInput.value.trim()})}
                 />
               </form>
 
               <span className="icon ion-plus-round"></span>
             </span>
         </div>
-        
+
         <DragDropContext onDragEnd={this.dragEnd}>
           <Droppable droppableId="lists" direction="horizontal" type="LIST">
             {(provided, snapshot) => (
