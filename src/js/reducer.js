@@ -1,7 +1,9 @@
+/* eslint prop-types: 0 */
+
 import uuidv4 from 'uuid/v4';
 import initialState from './initialState';
 
-//TODO: The uuidv4() calls make these impure.
+// TODO: The uuidv4() calls make these impure. IDs should be passed to action/reducer.
 // Pass the IDs through the action calls
 const reducer = (state, action) => {
   console.log(`action: ${action.type}`);
@@ -9,131 +11,144 @@ const reducer = (state, action) => {
   if (!state) {
     return initialState;
   }
-  
-  let boardIndex, listIndex, cardIndex;
-  
+
+  const newState = state;
+
   switch (action.type) {
-    case 'ADD_BOARD':
-      state.boards[action.boardId] = {
+    case 'ADD_BOARD': {
+      newState.boards[action.boardId] = {
         id: action.boardId,
         name: action.boardName,
         listIds: [],
       };
-      return {...state}
-    
-    case 'DELETE_BOARD':
-      for (let listId of state.boards[action.boardId].listIds) {
-        for (let cardId of state.lists[listId].cardIds) {
-          delete state.cards[cardId];
-        }
-        delete state.lists[listId];
-      }
-      delete state.boards[action.boardId];
-      return {...state};
-    
-    case 'RENAME_BOARD':
-      state.boards[action.boardId].name = action.boardName;
-      return {...state};
+      return { ...newState };
+    }
 
-    case 'REARRANGE_LIST':
-      let rlTemp;
+    case 'DELETE_BOARD': {
+      newState.boards[action.boardId].listIds.forEach((listId) => {
+        newState.lists[listId].cardIds.forEach((cardId) => {
+          delete newState.cards[cardId];
+        });
+        delete newState.lists[listId];
+      });
 
-      rlTemp = state.boards[action.boardId].listIds.slice(action.sourceIndex, action.sourceIndex + 1)[0];
-      state.boards[action.boardId].listIds.splice(action.sourceIndex, 1);
-      state.boards[action.boardId].listIds.splice(action.destinationIndex, 0, rlTemp);
+      delete newState.boards[action.boardId];
+      return { ...newState };
+    }
 
-      return {...state};
-    
-    case 'ADD_LIST':
-      let newListId = uuidv4();
-      state.lists[newListId] = {
+    case 'RENAME_BOARD': {
+      newState.boards[action.boardId].name = action.boardName;
+      return { ...newState };
+    }
+
+    case 'REARRANGE_LIST': {
+      const rlTemp = newState.boards[action.boardId].listIds
+        .slice(action.sourceIndex, action.sourceIndex + 1)[0];
+      newState.boards[action.boardId].listIds.splice(action.sourceIndex, 1);
+      newState.boards[action.boardId].listIds.splice(action.destinationIndex, 0, rlTemp);
+
+      return { ...newState };
+    }
+
+    case 'ADD_LIST': {
+      const newListId = uuidv4();
+
+      newState.lists[newListId] = {
         id: newListId,
         name: action.listName,
         cardIds: [],
       };
-      state.boards[action.boardId].listIds = [
+      newState.boards[action.boardId].listIds = [
         newListId,
-        ...state.boards[action.boardId].listIds,
+        ...newState.boards[action.boardId].listIds,
       ];
-      return {...state};
-    
-    case 'DELETE_LIST':
-      for (let cardId of state.lists[action.listId].cardIds) {
-        delete state.cards[cardId];
-      }
-      delete state.lists[action.listId];
-      state.boards[action.boardId].listIds = [
-        ...state.boards[action.boardId].listIds.filter(listId => listId !== action.listId),
+      return { ...newState };
+    }
+
+    case 'DELETE_LIST': {
+      newState.lists[action.listId].cardIds.forEach(cardId => delete newState.cards[cardId]);
+
+      delete newState.lists[action.listId];
+      newState.boards[action.boardId].listIds = [
+        ...newState.boards[action.boardId].listIds.filter(listId => listId !== action.listId),
       ];
-      return {...state};
-    
-    case 'RENAME_LIST':
-      state.lists[action.listId].name = action.listName;
-      return {...state};
-    
-    case 'ADD_CARD':
-      let newCardId = uuidv4();
-      state.cards[newCardId] = {
+      return { ...newState };
+    }
+
+    case 'RENAME_LIST': {
+      newState.lists[action.listId].name = action.listName;
+      return { ...newState };
+    }
+
+    case 'ADD_CARD': {
+      const newCardId = uuidv4();
+
+      newState.cards[newCardId] = {
         id: newCardId,
         name: action.cardName,
         description: action.cardDescription,
         done: false,
       };
-      state.lists[action.listId].cardIds = [
-        ...state.lists[action.listId].cardIds,
+      newState.lists[action.listId].cardIds = [
+        ...newState.lists[action.listId].cardIds,
         newCardId,
       ];
-      return {...state};
-    
-    case 'DELETE_CARD':
-      delete state.cards[action.cardId];
-      state.lists[action.listId].cardIds = [
-        ...state.lists[action.listId].cardIds.filter(cardId => cardId !== action.cardId),
+      return { ...newState };
+    }
+
+    case 'DELETE_CARD': {
+      delete newState.cards[action.cardId];
+      newState.lists[action.listId].cardIds = [
+        ...newState.lists[action.listId].cardIds.filter(cardId => cardId !== action.cardId),
       ];
-      return {...state};
-    
-    case 'SAVE_CARD':
-      state.cards[action.cardId] = {
-        ...state.cards[action.cardId],
+      return { ...newState };
+    }
+
+    case 'SAVE_CARD': {
+      newState.cards[action.cardId] = {
+        ...newState.cards[action.cardId],
         name: action.cardName,
         description: action.cardDescription,
-      }
-      return {...state};
-    
-    case 'SAVE_CARD_NAME':
-      state.cards[action.cardId] = {
-        ...state.cards[action.cardId],
+      };
+      return { ...newState };
+    }
+
+    case 'SAVE_CARD_NAME': {
+      newState.cards[action.cardId] = {
+        ...newState.cards[action.cardId],
         name: action.cardName,
-      }
-      return {...state};
-    
-    case 'SAVE_CARD_DESCRIPTION':
-      state.cards[action.cardId] = {
-        ...state.cards[action.cardId],
+      };
+      return { ...newState };
+    }
+
+    case 'SAVE_CARD_DESCRIPTION': {
+      newState.cards[action.cardId] = {
+        ...newState.cards[action.cardId],
         description: action.cardDescription,
-      }
-      return {...state};
+      };
+      return { ...newState };
+    }
 
-    case 'DONE_CARD':
-      state.cards[action.cardId] = {
-        ...state.cards[action.cardId],
-        done: !state.cards[action.cardId].done,
-      }
-      return {...state};
+    case 'DONE_CARD': {
+      newState.cards[action.cardId] = {
+        ...newState.cards[action.cardId],
+        done: !newState.cards[action.cardId].done,
+      };
+      return { ...newState };
+    }
 
-    case 'REARRANGE_CARD':
-      let rcTemp;
+    case 'REARRANGE_CARD': {
+      const rcTemp = newState.lists[action.sourceList].cardIds.splice(action.sourceIndex, 1)[0];
+      newState.lists[action.destList].cardIds.splice(action.destIndex, 0, rcTemp);
 
-      rcTemp = state.lists[action.sourceList].cardIds.splice(action.sourceIndex, 1)[0];
-      state.lists[action.destList].cardIds.splice(action.destIndex, 0, rcTemp);
+      newState.lists[action.sourceList].cardIds = [...newState.lists[action.sourceList].cardIds];
+      newState.lists[action.destList].cardIds = [...newState.lists[action.destList].cardIds];
 
-      state.lists[action.sourceList].cardIds = [...state.lists[action.sourceList].cardIds];
-      state.lists[action.destList].cardIds = [...state.lists[action.destList].cardIds];
+      return { ...newState };
+    }
 
-      return {...state};
-    
     default:
-      return state;
+      return newState;
   }
 };
 

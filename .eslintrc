@@ -4,7 +4,7 @@
 		"react"
 	],
 	"rules": {
-		"prop-types": [2]
+		"prop-types": [0]
 	},
 	"extends": "airbnb"
 }
