@@ -1,12 +1,12 @@
-import React, {Component, Fragment} from 'react';
-import {render} from 'react-dom';
-import {css} from 'react-emotion';
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
+import { css } from 'react-emotion';
 import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import CardContainer from '../../containers/CardContainer';
-import {cardBackgroundStyle} from '../Card/Card';
+import { cardBackgroundStyle } from '../Card/Card';
 import ListTitleInput from './ListTitleInput';
 import NewCardInput from './NewCardInput';
 
@@ -22,15 +22,15 @@ class List extends Component {
     this.state = {
       listTitleFocused: false,
       newCardFormVisible: false,
-    }
+    };
   }
-  
+
   toggleTitleFocus = () => {
-    this.setState({listTitleFocused: !this.state.listTitleFocused});
+    this.setState({ listTitleFocused: !this.state.listTitleFocused });
   }
 
   toggleNewCardForm = () => {
-    this.setState({newCardFormVisible: !this.state.newCardFormVisible});
+    this.setState({ newCardFormVisible: !this.state.newCardFormVisible });
   }
 
   dragEnd = (result) => {
@@ -40,37 +40,62 @@ class List extends Component {
   render() {
     console.log(`Rendered: ${this.props.id}`);
     console.log(this.props.cardIds);
+    // See if the dnd `provided` props can be lifted into the Board component
     return (
-      <div 
-      className={`list ${listStyle}`}
-      ref={this.props.provided.innerRef}
-      {...this.props.provided.draggableProps}
-      {...this.props.provided.dragHandleProps}
+      <div
+        className={`list ${listStyle}`}
+        ref={this.props.provided.innerRef}
+        {...this.props.provided.draggableProps}
+        {...this.props.provided.dragHandleProps}
       >
         <div className={`${listTitleStyle}`}>
-          {!this.state.listTitleFocused ? 
-          <span className='list-title' onClick={this.toggleTitleFocus}>
-            {this.props.name}
-          </span> :
-          <ListTitleInput onRenameList={this.props.onRenameList} 
-          listId={this.props.id}
-          defaultValue={this.props.name}
-          toggleTitleFocus={this.toggleTitleFocus}
-          hideInput={this.toggleTitleFocus}
-          />}
-          <span className={`list-delete ion-trash-a`} onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}></span>
-        </div>        
+          {
+            !this.state.listTitleFocused ?
+              <span
+                role="button"
+                tabIndex={0}
+                className="list-title"
+                onClick={this.toggleTitleFocus}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    this.toggleTitleFocus();
+                  }
+                }}
+              >
+                {this.props.name}
+              </span>
+            :
+              <ListTitleInput
+                onRenameList={this.props.onRenameList}
+                listId={this.props.id}
+                defaultValue={this.props.name}
+                toggleTitleFocus={this.toggleTitleFocus}
+                hideInput={this.toggleTitleFocus}
+              />
+          }
+          <span
+            role="button"
+            tabIndex={0}
+            className="list-delete ion-trash-a"
+            onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                this.props.onDeleteList(this.props.boardId, this.props.id);
+              }
+            }}
+          />
+        </div>
 
         {!this.state.newCardFormVisible ?
         <span className={`${newCardButton}`} onClick={this.toggleNewCardForm}>
           Add new card...
         </span> :
         <NewCardInput className={`${cardBackgroundStyle}`}
-        listId={this.props.id} 
+        listId={this.props.id}
         onAddCard={this.props.onAddCard}
         toggleVisibility={this.toggleNewCardForm}
         />}
-        
+
           <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
             {(provided, snapshot) => (
               <div className="cards" ref={provided.innerRef}>
