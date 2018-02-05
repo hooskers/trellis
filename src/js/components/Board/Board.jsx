@@ -81,12 +81,14 @@ class Board extends Component {
               this.toggleNewListInput();
             }}
             onKeyPress={(e) => {
-              if (e.key === 'Enter' && this.newListInput && this.newListInput.value.trim()) {
-                this.props.onAddList(this.props.id, this.newListInput.value.trim());
-                this.newListInput.value = '';
-              }
+              if (e.key === 'Enter') {
+                if (this.newListInput && this.newListInput.value.trim()) {
+                  this.props.onAddList(this.props.id, this.newListInput.value.trim());
+                  this.newListInput.value = '';
+                }
 
-              this.toggleNewListInput();
+                this.toggleNewListInput();
+              }
             }}
           >
             <form
