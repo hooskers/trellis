@@ -114,6 +114,7 @@ class Board extends Component {
                 }}
                 onClick={(e) => { e.stopPropagation(); }}
                 onChange={() => this.setState({ newListValue: this.newListInput.value.trim() })}
+                onKeyDown={e => e.key === 'Escape' && this.toggleNewListInput()}
               />
             </form>
 
