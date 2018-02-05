@@ -36,8 +36,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(`Rendered: ${this.props.id}`);
-    console.log(this.props.cardIds);
     // See if the dnd `provided` props can be lifted into the Board component
     return (
       <div

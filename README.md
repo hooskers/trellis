@@ -15,12 +15,10 @@ Since this is just something I tinker with in my free time, there is still a lot
   - Since you can route directly to a board, they need a typeable ID. Might just use their name as the ID and enforce a uniqueness constraint on board names.
 - Styling
   - It's ugly right now. It's all gray/white and there are no animations. It's just at a place that it isn't a pain to work with.
-- Drag 'n' Drop
-  - Will be using ReactDnD for this. Haven't used it yet for any project yet, but am excited to get my hand on it! Should be able to drag cards from list to list.
+- Drag and drop styling.
+  - Lists and cards can be dragged and dropped to new places with mouse, touch, and keyboard actions, but there is no styling to show that dnd has been activated. Especially confusing when using keyboard dnd actions.
 - Fully offline
-  - To use the [Ionicons font](http://ionicons.com/), I just link to its CDN resource in `index.html` because it was quick and easy and I wanted that trash icon! But, really, I should pull the style sheet directly into the project so Trellis can be used offline.
-- Progressive Web App (PWA)
-  - Not much use for it to be a PWA, but, eh, what the hell? They're a cool concept and it won't hurt anything so let's do it!
+  - To use the [Ionicons font](http://ionicons.com/), I just link to its CDN resource in `index.html` because it was quick and easy and I wanted that trashcan icon! But, really, I should pull the style sheet directly into the project so Trellis can be used offline.
 
 ## Usage
 You can create/delete boards with a name. Within those boards you can create/delete lists with a name. Within those lists you can create/delete cards.
