@@ -1,10 +1,7 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {css} from 'react-emotion';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {addList, rearrangeList, rearrangeCard, renameBoard, displayBoard} from '../actions.js';
-import Board from '../components/Board';
+import { addList, rearrangeList, rearrangeCard, renameBoard, displayBoard } from '../../actions';
+import Board from './Board';
 
 const mapStateToProps = (state, ownProps) => ({
   ...state.boards[ownProps.match.params.id],

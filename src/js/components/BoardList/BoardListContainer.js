@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {css} from 'react-emotion';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {addBoard, deleteBoard, renameBoard} from '../actions';
-import BoardList from '../components/BoardList';
+import { addBoard, deleteBoard, renameBoard } from '../../actions';
+import BoardList from './BoardList';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   boards: state.boards,
   ...state.boards,
 });

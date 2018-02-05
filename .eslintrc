@@ -4,7 +4,16 @@
 		"react"
 	],
 	"rules": {
-		"prop-types": [0]
+		"prop-types": [0],
+		"no-underscore-dangle": [
+			2,
+			{"allow": [
+				"__REDUX_DEVTOOLS_EXTENSION__"
+			]}
+		]
 	},
-	"extends": "airbnb"
+	"extends": "airbnb",
+	"env": {
+		"browser": true
+	}
 }
