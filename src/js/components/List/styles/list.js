@@ -1,5 +1,5 @@
 import { css } from 'react-emotion';
-import { cardBackgroundStyle } from '../../Card/styles/Card';
+import { cardBackgroundStyle } from '../../Card/styles/card';
 
 /** Styles for list component */
 export const listStyle = css`
