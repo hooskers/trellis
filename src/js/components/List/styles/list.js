@@ -15,6 +15,7 @@ export const listStyle = css`
   margin-right: 7px;
   overflow-y: auto;
   max-height: 96%;
+  position: relative;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;
@@ -29,6 +30,15 @@ export const listStyle = css`
 /** Styles for list title element */
 export const listTitleStyle = css`
   margin-bottom: 0.25em;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
 
   .list-title {
     float: left;
