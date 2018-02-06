@@ -31,15 +31,6 @@ export const listStyle = css`
 export const listTitleStyle = css`
   margin-bottom: 0.25em;
 
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-
   .list-title {
     float: left;
   }
@@ -49,6 +40,16 @@ export const listTitleStyle = css`
     cursor: pointer;
     &:hover {
       color: red;
+    }
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      pointer-events: none;
     }
   }
 `;
