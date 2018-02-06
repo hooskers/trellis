@@ -5,7 +5,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import CardContainer from '../Card/CardContainer';
 import ListTitleInput from './ListTitleInput';
 import NewCardInput from './NewCardInput';
-import { listStyle, listTitleStyle, newCardButtonStyle } from './styles/list';
+import { listStyle, listTitleStyle, newCardButtonStyle, deleteConfirmation } from './styles/list';
 import { cardBackgroundStyle } from '../Card/styles/card';
 
 /**
@@ -20,6 +20,7 @@ class List extends Component {
     this.state = {
       listTitleFocused: false,
       newCardFormVisible: false,
+      showDeleteConfirmation: false,
     };
   }
 
@@ -31,6 +32,11 @@ class List extends Component {
     this.setState({ newCardFormVisible: !this.state.newCardFormVisible });
   }
 
+  toggleDeleteConfirmation = () => {
+    const showDeleteConfirmation = !this.state.showDeleteConfirmation;
+    this.setState({ showDeleteConfirmation });
+  }
+
   dragEnd = (result) => {
     console.log(result);
   }
@@ -39,7 +45,7 @@ class List extends Component {
     // See if the dnd `provided` props can be lifted into the Board component
     return (
       <div
-        className={`list ${listStyle}`}
+        className={`list ${listStyle} ${this.state.showDeleteConfirmation && deleteConfirmation}`}
         ref={this.props.provided.innerRef}
         {...this.props.provided.draggableProps}
         {...this.props.provided.dragHandleProps}
@@ -73,10 +79,12 @@ class List extends Component {
             role="button"
             tabIndex={0}
             className="list-delete ion-trash-a"
-            onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}
+            onClick={() => this.toggleDeleteConfirmation()}
+            // onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                this.props.onDeleteList(this.props.boardId, this.props.id);
+                // this.props.onDeleteList(this.props.boardId, this.props.id);
+                this.toggleDeleteConfirmation();
               }
             }}
           />

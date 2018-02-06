@@ -22,8 +22,32 @@ export const listStyle = css`
     overflow-y: scroll;
   }
 
+  &::before {
+    content: '';
+    width: 0%;
+    height: 0%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+    /*background: linear-gradient(to bottom left, red, rgba(255,0,0,0));*/
+    background: red;
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    border-top-left-radius: 0px;
+  }
+
   .cards {
     min-height: 20px;
+  }
+`;
+
+export const deleteConfirmation = css`
+  &::before {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border-top-left-radius: 5px;
   }
 `;
 
@@ -33,23 +57,18 @@ export const listTitleStyle = css`
 
   .list-title {
     float: left;
+    position: relative;
+    z-index: 3;
   }
 
   .list-delete {
     float: right;
     cursor: pointer;
+    position: relative;
+    z-index: 3;
+
     &:hover {
       color: red;
-    }
-
-    &::after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      pointer-events: none;
     }
   }
 `;
