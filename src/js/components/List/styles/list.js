@@ -24,7 +24,7 @@ export const listStyle = css`
 
   &::before {
     content: '';
-    width: 0%;
+    width: 100%;
     height: 0%;
     position: absolute;
     top: 0px;
@@ -32,9 +32,8 @@ export const listStyle = css`
     pointer-events: none;
     /*background: linear-gradient(to bottom left, red, rgba(255,0,0,0));*/
     background: red;
-    transition: all 0.5s ease;
-    border-radius: 50%;
-    border-top-left-radius: 0px;
+    transition: all 0.33s ease-in-out;
+    border-radius: 5px%;
   }
 
   .cards {
@@ -44,10 +43,7 @@ export const listStyle = css`
 
 export const deleteConfirmation = css`
   &::before {
-    width: 100%;
     height: 100%;
-    border-radius: 5px;
-    border-top-left-radius: 5px;
   }
 `;
 

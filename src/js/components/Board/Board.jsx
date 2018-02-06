@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
-import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/list';
+import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
 
 /**
  * This component displays a board that is in charge of the list components
