@@ -53,7 +53,7 @@ class Card extends Component {
           // Otherwise, just show the title text
           this.state.nameInputFocused ?
             <CardInput
-              className={`${titleStyle}`}
+              classes={`${titleStyle}`}
               tag="input"
               cardId={this.props.id}
               placeholder="Enter card name"
@@ -76,7 +76,7 @@ class Card extends Component {
           // Otherwise, just show the description text
           this.state.descInputFocused ?
             <CardInput
-              className={`${descriptionStyle}`}
+              classes={`${descriptionStyle}`}
               tag="textarea"
               cardId={this.props.id}
               placeholder="Enter card description"
