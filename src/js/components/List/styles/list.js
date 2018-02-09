@@ -32,24 +32,24 @@ export const listStyle = css`
     pointer-events: none;
     /*background: linear-gradient(to bottom left, red, rgba(255,0,0,0));*/
     background: #ffc107;
-    transition: all 0.33s ease-in-out;
+    transition: all 0.15s ease-in-out;
     border-radius: 5px%;
   }
-
+  
   .list-delete-confirmation {
     opacity: 0;
     transition: opacity 0.15s ease-in-out;
     pointer-events: none;
-
+    
     display: grid;
     z-index: 2;
     grid-template-columns: 1fr 1fr;
     position: absolute;
     left: 0;
     width: 100%;
-    top: 2em;
-
+    
     .list-delete-message {
+      font-size: 1.25em;
       grid-column-start: 1;
       grid-column-end: 3;
       margin-bottom: 10px;
@@ -57,9 +57,9 @@ export const listStyle = css`
       margin-right: auto;
       font-weight: bold;
     }
-
+    
     button {
-      width: 50%;
+      width: 75%;
       margin-left: auto;
       margin-right: auto;
       border: none;
@@ -69,55 +69,62 @@ export const listStyle = css`
       color: white;
       cursor: pointer;
       transition: background 0.15s;
+      font-size: 1.25em;
     }
     
     .list-delete-confirm {
       background: #dc3545;
-
+      
       &:hover {
         background: #c82333;
       }
     }
-
+    
     .list-delete-cancel {
       background: #6c757d;
-
+      
       &:hover {
         background: #5a6268;
       }
     }
   }
-
+  
   .cards {
     min-height: 20px;
   }
-`;
-
+  `;
+  
 export const deleteConfirmation = css`
   &::before {
     height: 100%;
   }
-
+  
   .new-card-button {
     opacity: 0;
     pointer-events: none;
   }
-
+  
   .cards {
     z-index: 0;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease-in-out;
   }
-
+  
   .list-delete-confirmation {
     opacity: 1;
     pointer-events: auto;
   }
-`;
 
+  .list-title-bar {
+    opacity: 0;
+    pointer-events: none;
+  }
+`;
+  
 /** Styles for list title element */
 export const listTitleStyle = css`
+  font-size: 1.3em;
   margin-bottom: 0.25em;
 
   .list-title {

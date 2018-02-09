@@ -50,7 +50,7 @@ class List extends Component {
         {...this.props.provided.draggableProps}
         {...this.props.provided.dragHandleProps}
       >
-        <div className={`${listTitleStyle}`}>
+        <div className={`${listTitleStyle} list-title-bar`}>
           {
             !this.state.listTitleFocused ?
               <span
