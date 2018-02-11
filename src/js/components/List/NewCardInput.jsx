@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { newCardFormStyle } from './styles/newCardInput';
+import newCardFormStyle from './styles/newCardInput';
 
 /**
  * This component is a form that shows in a list that allows

@@ -71,12 +71,14 @@ export const cardBackgroundStyle = css`
 /** Styles for the card component */
 export const cardStyle = css`
   ${cardBackgroundStyle}
+  position: relative;
   display: grid;
   grid-template-columns: 10fr 80fr 10fr;
   grid-template-rows: 2em auto 1em;
   flex: 1 0 auto;
   border-left: 4px solid #0000;
   border-right: 4px solid #0000;
+  border-radius: 7px;
 
   &.done {
     border-left: 4px solid mediumseagreen;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { cardDescInputStyle } from './styles/cardInput';
+import { cardInputStyle, cardDescInputStyle } from './styles/cardInput';
 
 /**
  * Input that shows when you click on the title or description elements.
@@ -52,7 +52,7 @@ const CardInput = ({
           e.target.value = val;
         }}
         style={{ width: '100%', maxWidth: '100%' }}
-        className={tag === 'desc' ? cardDescInputStyle : ''}
+        className={`${cardInputStyle} ${tag === 'textarea' ? cardDescInputStyle : ''}`}
       />
     </form>
   );

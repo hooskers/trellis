@@ -90,10 +90,10 @@ class List extends Component {
           />
         </div>
 
-        <div class="list-delete-confirmation">
-          <span class="list-delete-message">Delete this list?</span>
-          <button class="list-delete-confirm" onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}>Delete</button>
-          <button class="list-delete-cancel" onClick={() => this.toggleDeleteConfirmation()}>Cancel</button>
+        <div className="list-delete-confirmation">
+          <span className="list-delete-message">Delete this list?</span>
+          <button className="list-delete-confirm" onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}>Delete</button>
+          <button className="list-delete-cancel" onClick={() => this.toggleDeleteConfirmation()}>Cancel</button>
         </div>
 
         {!this.state.newCardFormVisible ?

@@ -1,9 +1,16 @@
 import { css } from 'react-emotion';
 
-/** Style for card description input */
-const cardDescInputStyle = css`
-  min-height: 1em;
-  height: 7em;
+export const cardInputStyle = css`
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 1em;
+  border: none;
+  background: transparent;
+  outline: none;
+  border-bottom: solid 1px gray;
 `;
 
-export default cardDescInputStyle;
+/** Style for card description input */
+export const cardDescInputStyle = css`
+  font-weight: normal;
+`;

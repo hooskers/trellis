@@ -30,7 +30,6 @@ export const listStyle = css`
     top: 0px;
     left: 0px;
     pointer-events: none;
-    /*background: linear-gradient(to bottom left, red, rgba(255,0,0,0));*/
     background: #ffc107;
     transition: all 0.15s ease-in-out;
     border-radius: 5px%;
@@ -92,8 +91,8 @@ export const listStyle = css`
   .cards {
     min-height: 20px;
   }
-  `;
-  
+`;
+
 export const deleteConfirmation = css`
   &::before {
     height: 100%;
@@ -121,7 +120,7 @@ export const deleteConfirmation = css`
     pointer-events: none;
   }
 `;
-  
+
 /** Styles for list title element */
 export const listTitleStyle = css`
   font-size: 1.3em;
