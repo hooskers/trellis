@@ -11,6 +11,8 @@ import BoardContainer from './components/Board/BoardContainer';
 import reducer from './reducer';
 import initialState from './initialState';
 
+import '../css/ionicons.min.css';
+
 const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
