@@ -131,6 +131,10 @@ export const listTitleStyle = css`
     position: relative;
     z-index: 3;
     font-weight: bold;
+    text-overflow: ellipsis;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .list-delete {
