@@ -1,5 +1,4 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,7 +6,6 @@ module.exports = {
     app: './src/js/app.jsx',
   },
   plugins: [
-    new CleanWebpackPlugin(['docs']),
     new HtmlWebpackPlugin({
       title: 'Production',
       template: './src/index.html',
@@ -21,7 +19,7 @@ module.exports = {
         use: ['babel-loader'/* , 'eslint-loader' */],
       },
       {
-        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        test: /\.(eot|woff|woff2|svg|ttf)([?]?.*)$/,
         loader: 'url-loader?limit=50000',
       },
       {
