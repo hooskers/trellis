@@ -4,11 +4,11 @@ const boardListStyle = css`
   height: 100%;
   background-color: #5e35b1;
   color: white;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow: auto;
+  
   #header {
     width: 100%;
     align-self: flex-start;
@@ -16,23 +16,27 @@ const boardListStyle = css`
     font-size: 2em;
     border-bottom: 1px solid #ffffff33;
     color: white;
-
+    margin-bottom: 2em;
+    
     a, a:visited {
       color: inherit;
     }
-
+    
     #site-title {
       padding-left: 10px;
     }
-
+    
     #header-links {
       float: right;
       padding-right: 10px;
     }
   }
 
+  #get-started-msg {
+    font-size: 2em;
+  }
+
   #new-board-form {
-    margin-top: 2em;
     margin-bottom: 2em;
 
     #new-board-input {

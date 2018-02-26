@@ -25,6 +25,7 @@ const BoardList = ({
           <a target="_blank" className="ion-social-github" href="https://www.github.com/hooskers/trellis" />
         </span>
       </div>
+      <span id="get-started-msg">Add a board to get started:</span>
       <form
         id="new-board-form"
         onSubmit={(e) => {
