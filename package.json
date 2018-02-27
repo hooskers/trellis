@@ -5,6 +5,7 @@
   "author": "Wade Johnson",
   "license": "MIT",
   "devDependencies": {
+    "@storybook/react": "^3.3.14",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
@@ -26,6 +27,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
+  	"storybook": "start-storybook -p 9001 -c .storybook",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "test": "jest",

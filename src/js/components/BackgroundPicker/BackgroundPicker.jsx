@@ -1,50 +1,30 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { backgroundPickerBtnStyle, backgroundPickerPanelStyle } from './styles/backgroundPicker';
+import backgroundPickerPanelStyle from './styles/backgroundPicker';
+import * as backgrounds from './styles/backgrounds';
 
-class BackgroundPicker extends Component {
-  constructor() {
-    super();
+const BackgroundPicker = () => {
+  console.log(backgrounds);
 
-    this.state = {
-      panelOpen: false,
-      pickerX: null,
-      pickerY: null,
-    };
+  return (
+    <div
+      id="background-picker-panel"
+      className={backgroundPickerPanelStyle}
+    >
+      {Object.entries(backgrounds).map((kv) => {
+        const name = kv[0];
+        const value = kv[1];
 
-    this.pickerButton = null;
-  }
-
-  componentDidMount() {
-    const rect = this.pickerButton.getBoundingClientRect();
-    const vWidth = window.visualViewport.width;
-    const vHeight = window.visualViewport.height;
-    
-
-    this.setState({
-      pickerX: rect.left - (rect.width / 2),
-      pickerY: rect.bottom,
-    });
-  }
-
-  render() {
-    const { pickerX, pickerY } = this.state;
-
-    return (
-      <Fragment>
-        <div
-          id="background-picker-button"
-          className={backgroundPickerBtnStyle}
-          ref={(el) => { this.pickerButton = el; }}
-        />
-        <div
-          id="background-picker-panel"
-          className={backgroundPickerPanelStyle(pickerX, pickerY)}
-        />
-      </Fragment>
-    );
-  }
-}
+        return (
+          <div
+            key={name}
+            className={`background-button ${value}`}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default BackgroundPicker;
