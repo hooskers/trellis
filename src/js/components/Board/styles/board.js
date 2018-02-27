@@ -17,25 +17,30 @@ export const boardHeaderStyle = css`
 export const boardTitleStyle = css`
   font-size: 2em;
   float: left;
+  margin-right: auto;
 `;
 
 export const addListBtnStyle = css`
-  position: absolute;
+  width: 1em;
   right: 0px;
   padding: inherit;
-  margin-left: auto;
   font-size: 1.15em;
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
   padding-left: 7px;
+  padding-right: 0px;
+  margin-right: 20px;
+  outline: none;
+
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     padding-right: 0px;
   }
 
   &.new-list-form-open {
     width: 33%;
+
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       width: 100%
     }
@@ -50,6 +55,7 @@ export const addListBtnStyle = css`
 
   .icon {
     transition: transform 0.25s ease;
+    margin: 0px !important;
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       margin: auto 25px auto 25px;
@@ -113,6 +119,10 @@ export const addListBtnStyle = css`
 
     &.closed input {
       border: none;
+    }
+
+    &.open input {
+      margin-right: 10px;
     }
   }
 `;

@@ -4,6 +4,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
 import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
+import BackgroundPicker from '../BackgroundPicker/BackgroundPicker';
 
 /**
  * This component displays a board that is in charge of the list components
@@ -120,6 +121,7 @@ class Board extends Component {
 
             <span className="icon ion-plus-round" />
           </span>
+          <BackgroundPicker />
         </div>
 
         <DragDropContext onDragEnd={this.dragEnd}>
