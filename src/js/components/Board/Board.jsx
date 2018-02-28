@@ -4,7 +4,8 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
 import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
-import BackgroundPicker from '../BackgroundPicker/BackgroundPicker';
+import BackgroundPickerContainer from '../BackgroundPicker/BackgroundPicker';
+import * as backgrounds from '../BackgroundPicker/styles/backgrounds';
 
 /**
  * This component displays a board that is in charge of the list components
@@ -121,18 +122,22 @@ class Board extends Component {
 
             <span className="icon ion-plus-round" />
           </span>
-          <BackgroundPicker />
+          {/* <BackgroundPickerContainer /> */}
         </div>
 
         <DragDropContext onDragEnd={this.dragEnd}>
           <Droppable droppableId="lists" direction="horizontal" type="LIST">
             {(provided, snapshot) => (
-              <div id="lists" className={`${listsStyle}`} ref={provided.innerRef}>
+              <div id="lists" className={`${listsStyle} ${backgrounds[this.props.background]}`} ref={provided.innerRef}>
                 {this.props.listIds.map((listId, index) => (
                   <Draggable key={listId} index={index} draggableId={listId} type="LIST">
                     {(provided, snapshot) => (
                       <div>
-                        <ListContainer provided={provided} boardId={this.props.id} listId={listId}/>
+                        <ListContainer
+                          provided={provided}
+                          boardId={this.props.id}
+                          listId={listId}
+                        />
                         {provided.placeholder}
                       </div>
                     )}
@@ -154,6 +159,7 @@ Board.propTypes = {
   name: PropTypes.string.isRequired,
   /** IDs of the lists that belong to the board */
   listIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  background: PropTypes.string.isRequired,
   /** Callback to add list to the board */
   onAddList: PropTypes.func.isRequired,
   /** Callback to rename board */

@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import backgroundPickerPanelStyle from './styles/backgroundPicker';
 import * as backgrounds from './styles/backgrounds';
 
-const BackgroundPicker = () => {
-  console.log(backgrounds);
-
+const BackgroundPicker = ({ boardId, changeBackground }) => {
   return (
     <div
       id="background-picker-panel"
@@ -19,12 +17,21 @@ const BackgroundPicker = () => {
         return (
           <div
             key={name}
+            role="button"
+            tabIndex={0}
             className={`background-button ${value}`}
+            onClick={() => changeBackground(boardId, name)}
+            onKeyPress={e => e.key === 'Enter' && changeBackground(boardId, name)}
           />
         );
       })}
     </div>
   );
+};
+
+BackgroundPicker.propTypes = {
+  boardId: PropTypes.string.isRequired,
+  changeBackground: PropTypes.func.isRequired,
 };
 
 export default BackgroundPicker;

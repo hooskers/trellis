@@ -90,3 +90,9 @@ export const rearrangeCard = (sourceList, destList, sourceIndex, destIndex) => (
   sourceIndex,
   destIndex,
 });
+
+export const changeBackground = (boardId, background) => ({
+  type: 'CHANGE_BACKGROUND',
+  boardId,
+  background,
+});

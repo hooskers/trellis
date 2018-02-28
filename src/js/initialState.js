@@ -4,6 +4,7 @@ const initialState = {
       id: 'board1',
       name: 'Test Board',
       listIds: ['list1'],
+      background: 'polkaDot',
     },
   },
   lists: {

@@ -12,6 +12,6 @@ storiesOf('BackgroundPicker', module)
         overflowY: 'auto',
       }}
     >
-      <BackgroundPicker />
+      <BackgroundPicker boardId="test" />
     </div>
   ));

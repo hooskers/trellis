@@ -4,6 +4,8 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import { boardListStyle, boardWithBackgroundStyle } from './styles/boardList';
+import BackgroundPickerContainer from '../BackgroundPicker/BackgroundPickerContainer';
+import * as backgrounds from '../BackgroundPicker/styles/backgrounds';
 
 /**
  * This component displays the saved boards
@@ -50,10 +52,13 @@ const BoardList = ({
 
       {Object.values(boards).map(board => (
         <div
-          className={`board ${boardWithBackgroundStyle('background-color: white')}`}
+          className={`board ${boardWithBackgroundStyle(backgrounds[board.background])}`}
           key={board.id}
         >
           <div className="board-info-container">
+            <div className="background-picker">
+              <BackgroundPickerContainer boardId={board.id} />
+            </div>
             <Link
               href={`board/${board.id}`}
               to={`board/${board.id}`}

@@ -147,6 +147,15 @@ const reducer = (state, action) => {
       return { ...newState };
     }
 
+    case 'CHANGE_BACKGROUND': {
+      newState.boards[action.boardId] = {
+        ...newState.boards[action.boardId],
+        background: action.background,
+      };
+
+      return { ...newState };
+    }
+
     default:
       return newState;
   }
