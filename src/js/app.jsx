@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { css } from 'react-emotion';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { HashRouter, Switch, Route } from 'react-router-dom';
@@ -21,9 +20,7 @@ const loadState = () => {
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    console.error('Error retrieving localStorage state');
-    console.error(err);
-    return undefined;
+    throw new Error(err);
   }
 };
 
@@ -32,8 +29,7 @@ const saveState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (err) {
-    console.error('Error setting localStorage state');
-    console.error(err);
+    throw new Error(err);
   }
 };
 

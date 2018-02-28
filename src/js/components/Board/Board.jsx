@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
 import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
-import BackgroundPickerContainer from '../BackgroundPicker/BackgroundPicker';
+// import BackgroundPickerContainer from '../BackgroundPicker/BackgroundPicker';
 import * as backgrounds from '../BackgroundPicker/styles/backgrounds';
 
 /**
@@ -44,13 +44,11 @@ class Board extends Component {
     // If the list was dragged and dropped in its orignal place, do nothing
     if (!result.destination) return;
 
-    console.log(result);
     if (result.type === 'LIST') {
       this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
     }
 
     if (result.type === 'CARD') {
-      console.log('rearrange the cards, please');
       this.props.onRearrangeCard(
         result.source.droppableId,
         result.destination.droppableId,
@@ -110,7 +108,6 @@ class Board extends Component {
             >
               <input
                 placeholder="New list name"
-                autoFocus
                 ref={(node) => {
                   this.newListInput = node;
                 }}
@@ -127,18 +124,18 @@ class Board extends Component {
 
         <DragDropContext onDragEnd={this.dragEnd}>
           <Droppable droppableId="lists" direction="horizontal" type="LIST">
-            {(provided, snapshot) => (
-              <div id="lists" className={`${listsStyle} ${backgrounds[this.props.background]}`} ref={provided.innerRef}>
+            {providedDrop => (
+              <div id="lists" className={`${listsStyle} ${backgrounds[this.props.background]}`} ref={providedDrop.innerRef}>
                 {this.props.listIds.map((listId, index) => (
                   <Draggable key={listId} index={index} draggableId={listId} type="LIST">
-                    {(provided, snapshot) => (
+                    {providedDrag => (
                       <div>
                         <ListContainer
-                          provided={provided}
+                          provided={providedDrag}
                           boardId={this.props.id}
                           listId={listId}
                         />
-                        {provided.placeholder}
+                        {providedDrag.placeholder}
                       </div>
                     )}
                   </Draggable>
@@ -163,7 +160,7 @@ Board.propTypes = {
   /** Callback to add list to the board */
   onAddList: PropTypes.func.isRequired,
   /** Callback to rename board */
-  onRenameBoard: PropTypes.func.isRequired,
+  // onRenameBoard: PropTypes.func.isRequired,
   onRearrangeList: PropTypes.func.isRequired,
   onRearrangeCard: PropTypes.func.isRequired,
 };

@@ -15,7 +15,7 @@ const BoardList = ({
   boards,
   onAddBoardSubmit,
   onDeleteBoard,
-  onRenameBoard,
+  // onRenameBoard,
 }) => {
   let input;
 
@@ -24,7 +24,13 @@ const BoardList = ({
       <div id="header">
         <span id="site-title">Trellis</span>
         <span id="header-links">
-          <a target="_blank" className="ion-social-github" href="https://www.github.com/hooskers/trellis" />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.github.com/hooskers/trellis"
+          >
+            <span className="ion-social-github" />
+          </a>
         </span>
       </div>
       <span id="get-started-msg">Add a board to get started:</span>
@@ -88,7 +94,7 @@ BoardList.propTypes = {
   /** Callback to delete a board */
   onDeleteBoard: PropTypes.func.isRequired,
   /** Callback to rename a board */
-  onRenameBoard: PropTypes.func.isRequired,
+  // onRenameBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;

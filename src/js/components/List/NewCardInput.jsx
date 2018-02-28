@@ -60,7 +60,7 @@ const NewCardInput = ({
       <input
         className="new-title"
         placeholder="New card name"
-        autoFocus
+        autoFocus // eslint-disable-line jsx-a11y/no-autofocus
         onMouseDown={() => {
           cardNameInputFocus = true;
         }}

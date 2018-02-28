@@ -132,6 +132,7 @@ Card.propTypes = {
   onSaveCardDescription: PropTypes.func.isRequired,
   onDoneCard: PropTypes.func.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
+  provided: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Card;

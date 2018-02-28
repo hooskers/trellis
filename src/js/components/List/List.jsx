@@ -37,10 +37,6 @@ class List extends Component {
     this.setState({ showDeleteConfirmation });
   }
 
-  dragEnd = (result) => {
-    console.log(result);
-  }
-
   render() {
     // See if the dnd `provided` props can be lifted into the Board component
     return (
@@ -115,19 +111,23 @@ class List extends Component {
         }
 
         <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
-          {(provided, snapshot) => (
-            <div className="cards" ref={provided.innerRef}>
+          {providedDrop => (
+            <div className="cards" ref={providedDrop.innerRef}>
               {this.props.cardIds.map((cardId, index) => (
                 <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
-                  {(provided, snapshot) => (
+                  {providedDrag => (
                     <div>
-                      <CardContainer provided={provided} listId={this.props.id} cardId={cardId} />
-                      {provided.placeholder}
+                      <CardContainer
+                        provided={providedDrag}
+                        listId={this.props.id}
+                        cardId={cardId}
+                      />
+                      {providedDrag.placeholder}
                     </div>
                   )}
                 </Draggable>
               ))}
-              {provided.placeholder}
+              {providedDrop.placeholder}
             </div>
           )}
         </Droppable>
@@ -148,6 +148,7 @@ List.propTypes = {
   onRenameList: PropTypes.func.isRequired,
   onDeleteList: PropTypes.func.isRequired,
   onAddCard: PropTypes.func.isRequired,
+  provided: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default List;

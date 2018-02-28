@@ -6,8 +6,6 @@ import initialState from './initialState';
 // TODO: The uuidv4() calls make these impure. IDs should be passed to action/reducer.
 // Pass the IDs through the action calls
 const reducer = (state, action) => {
-  console.log(`action: ${action.type}`);
-
   if (!state) {
     return initialState;
   }

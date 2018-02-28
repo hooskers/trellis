@@ -28,7 +28,7 @@ const ListTitleInput = ({
     >
       <input
         placeholder="Rename list"
-        autoFocus
+        autoFocus // eslint-disable-line jsx-a11y/no-autofocus
         defaultValue={defaultValue}
         onFocus={(e) => {
           // React `autocomplete` attribute places the cursor at the beginning
