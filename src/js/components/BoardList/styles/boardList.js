@@ -110,7 +110,7 @@ const boardWithBackgroundStyle = bg => css`
     height: 100%;
     background: #fff9;
     background: linear-gradient(to right, rgba(255,255,255,1) 10%,rgba(255,255,255,0) 100%);
-    font-size: 2em;
+    font-size: 1.6em;
     text-shadow: 0px 0px 1px #fff5;
   }
 
@@ -131,7 +131,11 @@ const boardWithBackgroundStyle = bg => css`
     display: inline-block;
   }
 
-  .delete-board {
+  .board-name {
+    font-size: 1.4em;
+  }
+
+  .edit-board {
     margin-left: 7px;
 
     &:hover {
