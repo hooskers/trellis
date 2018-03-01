@@ -59,19 +59,25 @@ class Board extends Component {
   }
   render() {
     let input;
+    const { showNewListInput, newListValue } = this.state;
 
     return (
       <Fragment>
-        <div id="board-header" className={`${boardHeaderStyle}`}>
-          <span id="board-title" className={`${boardTitleStyle}`}>{this.props.name}</span>
+        <div
+          id="board-header"
+          className={`${boardHeaderStyle}`}
+        >
+          <span
+            id="board-title"
+            className={`${boardTitleStyle} ${showNewListInput ? 'new-list-form-open' : ''}`}
+          >
+            {this.props.name}
+          </span>
           <span
             role="button"
             tabIndex={0}
             id="add-list-btn"
-            className={`${addListBtnStyle}
-              ${this.state.showNewListInput ? 'new-list-form-open' : ''}
-              ${!this.state.newListValue ? 'new-list-form-empty' : ''}
-            `}
+            className={`${addListBtnStyle} ${showNewListInput ? 'new-list-form-open' : ''} ${!newListValue ? 'new-list-form-empty' : ''}`}
             onClick={() => {
               if (this.newListInput && this.newListInput.value.trim()) {
                 this.props.onAddList(this.props.id, this.newListInput.value.trim());
@@ -93,7 +99,7 @@ class Board extends Component {
           >
             <form
               id="new-list-form"
-              className={`${this.state.showNewListInput ? 'open' : 'closed'}`}
+              className={`${showNewListInput ? 'open' : 'closed'}`}
               onSubmit={(e) => {
                 e.preventDefault();
                 if (!this.newListInput.value.trim()) {

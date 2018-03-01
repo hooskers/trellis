@@ -7,7 +7,6 @@ export const boardHeaderStyle = css`
   position: sticky;
   left: 0px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 2.5px;
   padding-bottom: 2.5px;
   box-shadow: 0px 1px 7px 3px #0000001f;
@@ -18,6 +17,12 @@ export const boardTitleStyle = css`
   font-size: 2em;
   float: left;
   margin-right: auto;
+  
+  &.new-list-form-open {
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      display: none;
+    }
+  }
 `;
 
 export const addListBtnStyle = css`
@@ -43,6 +48,7 @@ export const addListBtnStyle = css`
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       width: 100%
+      padding-left: 0px;
     }
   }
 
@@ -115,6 +121,10 @@ export const addListBtnStyle = css`
       border-bottom: none;
       border-left: 1px solid #0000001a;
       border-top: none;
+
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        border-left: none;
+      }
     }
 
     &.closed input {

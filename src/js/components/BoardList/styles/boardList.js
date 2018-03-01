@@ -50,6 +50,10 @@ const boardListStyle = css`
       color: white;
       vertical-align: middle;
 
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 100%;
+      }
+
       &::placeholder {
         color: #FFFA;
         text-align: center;
@@ -68,6 +72,12 @@ const boardListStyle = css`
       text-shadow: 0px 0px 1px #0005;
       padding-left: 15px;
       padding-right: 15px;
+
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
 
       &:hover {
         background-color: #1ae9aa;
@@ -88,27 +98,46 @@ const boardWithBackgroundStyle = bg => css`
   height: 10em;
   margin-bottom: 1.5em;
   color: black;
+  z-index: 1;
 
   .board-info-container {
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      background: #fffd;
+    }
+
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     background: #fff9;
-    background: linear-gradient(to right, rgba(255,255,255,1) 10%,rgba(255,255,255,0) 100%); 
+    background: linear-gradient(to right, rgba(255,255,255,1) 10%,rgba(255,255,255,0) 100%);
+    font-size: 2em;
+    text-shadow: 0px 0px 1px #fff5;
   }
 
   .background-picker {
     height: 100%;
-    width: 100px;
+    width: 125px;
     overflow: auto;
     display: inline-block;
     float: left;
+    margin-right: 7px;
   }
 
-  a, a:visited {
+  .board-link, .board-link:visited {
     text-decoration: none;
-    font-size: 2em;
     color: inherit;
+    width: calc(100% - 132px);
+    height: 100%;
+    display: inline-block;
+  }
+
+  .delete-board {
+    margin-left: 7px;
+
+    &:hover {
+      cursor: pointer;
+      color: red;
+    }
   }
 `;
 

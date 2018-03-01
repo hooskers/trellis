@@ -49,6 +49,7 @@ const BoardList = ({
         <input
           id="new-board-input"
           placeholder="New board name"
+          autoComplete="off"
           ref={(node) => {
             input = node;
           }}
@@ -68,17 +69,21 @@ const BoardList = ({
             <Link
               href={`board/${board.id}`}
               to={`board/${board.id}`}
+              className="board-link"
             >
               {board.name}
-              <br />
+              <span
+                role="button"
+                tabIndex={0}
+                className="delete-board ion-trash-a"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  onDeleteBoard(board.id);
+                }}
+                onKeyPress={e => e.key === 'Enter' && onDeleteBoard(board.id)}
+              />
             </Link>
-            <span
-              role="button"
-              tabIndex={0}
-              className="delete-board ion-trash-a"
-              onClick={() => onDeleteBoard(board.id)}
-              onKeyPress={e => e.key === 'Enter' && onDeleteBoard(board.id)}
-            />
           </div>
         </div>
         ))}

@@ -19,7 +19,10 @@ const BackgroundPicker = ({ boardId, changeBackground }) => (
           role="button"
           tabIndex={0}
           className={`background-button ${value}`}
-          onClick={() => changeBackground(boardId, name)}
+          onClick={(e) => {
+            e.stopPropagation();
+            changeBackground(boardId, name);
+          }}
           onKeyPress={e => e.key === 'Enter' && changeBackground(boardId, name)}
         />
       );
