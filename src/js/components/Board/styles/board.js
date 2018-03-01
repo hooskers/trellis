@@ -139,8 +139,6 @@ export const addListBtnStyle = css`
 
 export const listsStyle = css`
   display: flex;
-  margin-left: 7px;
-  margin-right: 7px;
   padding-top: 15px;
   overflow-x: auto;
   overflow-y: hidden;
