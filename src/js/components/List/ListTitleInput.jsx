@@ -39,11 +39,13 @@ const ListTitleInput = ({
         }}
         onBlur={(e) => {
           e.preventDefault();
+          // If there is no value in input, just hide the input
           if (listNameInput.value.trim() === '') {
             hideInput();
             return;
           }
 
+          // If there is a value, rename the list and hide the input
           onRenameList(listId, listNameInput.value.trim());
           hideInput();
         }}

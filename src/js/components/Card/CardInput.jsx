@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cardInputStyle, cardDescInputStyle } from './styles/cardInput';
 
 /**
- * Input that shows when you click on the title or description elements.
+ * Input that shows when you click on the title or description elements of `Card` component.
  * The `tag` prop should either be `input` or `textarea`.
  *  That will be the element that gets rendered.
  */
@@ -19,7 +19,7 @@ const CardInput = ({
 }) => {
   // Since this variable is capitalized, using it as a tag name will make React
   // call `createComponent` with the value of the `tag` string prop.
-  // It is used here let us show either an `input` or `textarea` element.
+  // It is used here to let us dynamically show an `input` or `textarea` element.
   const TagName = tag;
   let refNode;
 

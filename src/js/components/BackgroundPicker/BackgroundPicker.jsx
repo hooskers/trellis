@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import backgroundPickerPanelStyle from './styles/backgroundPicker';
 import * as backgrounds from './styles/backgrounds';
 
+/**
+ * Loops through all available board backgrounds and displays them
+ * as a list of buttons. Clicking a button will call the
+ * `CHANGE_BACKGROUND` action with the selected background and board IDs.
+ */
 const BackgroundPicker = ({ boardId, changeBackground }) => (
   <div
     id="background-picker-panel"
@@ -31,7 +36,9 @@ const BackgroundPicker = ({ boardId, changeBackground }) => (
 );
 
 BackgroundPicker.propTypes = {
+  /** ID of board */
   boardId: PropTypes.string.isRequired,
+  /** Redux `CHANGE_BACKGROUND` action function to change the board's background */
   changeBackground: PropTypes.func.isRequired,
 };
 

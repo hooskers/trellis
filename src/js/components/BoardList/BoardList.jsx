@@ -3,11 +3,22 @@ import uuidv4 from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 import { boardListStyle } from './styles/boardList';
-import Board from './Board';
+import BoardItem from './BoardItem';
 
 /**
- * This component displays the saved boards
- * There is an input element to add new boards
+ * TODO:
+ * Abstract out just the list of boards to this component
+ * and use it in a `Homepage` component.
+ * Because of the header and background and stuff,
+ * this component is restricted to being the homepage,
+ * even though the actual lists of boards could be useful in other places, too.
+ */
+
+
+// TODO: This could probably be a funcitonal component
+
+/**
+ * Displays list of user's saved boards
  */
 class BoardList extends Component {
   render() {
@@ -39,10 +50,12 @@ class BoardList extends Component {
           id="new-board-form"
           onSubmit={(e) => {
             e.preventDefault();
+            // If there is no value, do nothing
             if (!newBoardInput.value.trim()) {
               return;
             }
 
+            // Create a uuid and use it with input value to create new board
             onAddBoardSubmit(uuidv4(), newBoardInput.value.trim());
             newBoardInput.value = '';
           }}
@@ -59,7 +72,7 @@ class BoardList extends Component {
         </form>
 
         {Object.values(boards).map(board => (
-          <Board
+          <BoardItem
             key={board.id}
             board={board}
             onDeleteBoard={onDeleteBoard}
@@ -74,11 +87,11 @@ class BoardList extends Component {
 BoardList.propTypes = {
   /** Object containing the boards */
   boards: PropTypes.shape({}).isRequired,
-  /** Function to add a board */
+  /** `ADD_BOARD` action type function to add a board */
   onAddBoardSubmit: PropTypes.func.isRequired,
-  /** Function to delete a board */
+  /** `DELETE_BOARD` action type function to delete a board */
   onDeleteBoard: PropTypes.func.isRequired,
-  /** Function to rename a board */
+  /** `RENAME_BOARD` action type function to rename a board */
   onRenameBoard: PropTypes.func.isRequired,
 };
 

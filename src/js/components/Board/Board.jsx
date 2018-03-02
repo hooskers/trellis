@@ -4,23 +4,27 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
 import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
-// import BackgroundPickerContainer from '../BackgroundPicker/BackgroundPicker';
 import * as backgrounds from '../BackgroundPicker/styles/backgrounds';
 
 /**
  * This component displays a board that is in charge of the list components
- * Contains input to rename the board
+ * Loops through a board's list IDs and renders a `List` component for each.
+ * This is where the root of React Beautiful DnD's `DragDropContext` lives.
+ * The `lists` container element is a `Droppable` for lists which are `Draggables`
+ * The `DragDropContext` is also accessed in the `List` and `Card` components
  */
-
 class Board extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      // Controls whether form for new lists is visible to user or not.
       showNewListInput: false,
+      // Store current value of new list form
       newListValue: '',
     };
 
+    // Instance var to store new list for ref
     this.newListInput = null;
   }
 
@@ -32,6 +36,10 @@ class Board extends Component {
     }
   }
 
+  /**
+   * Toggles the state property that controls visibility of
+   * the input to create new lists.
+   */
   toggleNewListInput = () => {
     if (this.state.showNewListInput) {
       this.setState({ newListValue: '' });
@@ -40,14 +48,25 @@ class Board extends Component {
     this.setState({ showNewListInput: !this.state.showNewListInput });
   }
 
+  /**
+   * Callback for React Beautiful DnD's `onDragEnd` event.
+   * Triggered when a `Droppable` is dropped.
+   * Handles action types for `List` and `Card` components being dropped.
+   */
   dragEnd = (result) => {
-    // If the list was dragged and dropped in its orignal place, do nothing
+    // If the draggable was dropped in its orignal place, do nothing.
     if (!result.destination) return;
 
+    // If a list was dragged and dropped, call the `REARRANGE_LIST` action.
     if (result.type === 'LIST') {
-      this.props.onRearrangeList(this.props.id, result.source.index, result.destination.index);
+      this.props.onRearrangeList(
+        this.props.id,
+        result.source.index,
+        result.destination.index,
+      );
     }
 
+    // If a card was dragged and dropped, call the `REARRANGE_CARD` action.
     if (result.type === 'CARD') {
       this.props.onRearrangeCard(
         result.source.droppableId,
@@ -57,6 +76,7 @@ class Board extends Component {
       );
     }
   }
+
   render() {
     let input;
     const { showNewListInput, newListValue } = this.state;
@@ -79,20 +99,24 @@ class Board extends Component {
             id="add-list-btn"
             className={`${addListBtnStyle} ${showNewListInput ? 'new-list-form-open' : ''} ${!newListValue ? 'new-list-form-empty' : ''}`}
             onClick={() => {
+              // If input exists and has a value, use value as name for new list on board.
               if (this.newListInput && this.newListInput.value.trim()) {
                 this.props.onAddList(this.props.id, this.newListInput.value.trim());
                 this.newListInput.value = '';
               }
 
+              // Close the list after submitting
               this.toggleNewListInput();
             }}
             onKeyPress={(e) => {
+              // If input exists and has a value, use value as name for new list on board.
               if (e.key === 'Enter') {
                 if (this.newListInput && this.newListInput.value.trim()) {
                   this.props.onAddList(this.props.id, this.newListInput.value.trim());
                   this.newListInput.value = '';
                 }
 
+                // Close the list after submitting
                 this.toggleNewListInput();
               }
             }}
@@ -102,13 +126,17 @@ class Board extends Component {
               className={`${showNewListInput ? 'open' : 'closed'}`}
               onSubmit={(e) => {
                 e.preventDefault();
+
+                // If there is no value in the input, do nothing.
                 if (!this.newListInput.value.trim()) {
                   return;
                 }
 
+                // Add list to board and reset the input's value
                 this.props.onAddList(this.props.id, this.newListInput.value.trim());
                 this.newListInput.value = '';
 
+                // Close the form after submitting it
                 this.toggleNewListInput();
               }}
             >
@@ -162,13 +190,19 @@ Board.propTypes = {
   name: PropTypes.string.isRequired,
   /** IDs of the lists that belong to the board */
   listIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /** ID of board's background.  */
   background: PropTypes.string.isRequired,
-  /** Callback to add list to the board */
+  /** `ADD_LIST` action function to add list to the board */
   onAddList: PropTypes.func.isRequired,
-  /** Callback to rename board */
-  // onRenameBoard: PropTypes.func.isRequired,
+  /** `REARRANGE_LIST` action function to rearrange list order in board */
   onRearrangeList: PropTypes.func.isRequired,
+  /** `REARRANGE_CARD` action function to move cards between lists.
+   * (This is needed in this `Board` component because
+   * this is where the `DragDropContext` lives.)
+   */
   onRearrangeCard: PropTypes.func.isRequired,
+  /** `RENAME_BOARD` action function to rename board */
+  // onRenameBoard: PropTypes.func.isRequired,
 };
 
 export default Board;

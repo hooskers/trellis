@@ -128,10 +128,15 @@ Card.propTypes = {
   done: PropTypes.bool.isRequired,
   /** ID of list that card belongs to */
   listId: PropTypes.string.isRequired,
+  /** `SAVE_CARD` action function */
   onSaveCardName: PropTypes.func.isRequired,
+  /** `SAVE_CARD_DESCRIPTION` action function */
   onSaveCardDescription: PropTypes.func.isRequired,
+  /** `DONE_CARD` action function */
   onDoneCard: PropTypes.func.isRequired,
+  /** `DELETE_CARD` action function */
   onDeleteCard: PropTypes.func.isRequired,
+  /** `provided` object from React Beautiful DnD */
   provided: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

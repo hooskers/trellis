@@ -110,6 +110,7 @@ NewCardInput.propTypes = {
   onAddCard: PropTypes.func.isRequired,
   /** Callback to show/hide the form */
   toggleVisibility: PropTypes.func.isRequired,
+  /** Class names that will be used in the `className` prop of component */
   classes: PropTypes.string,
 };
 

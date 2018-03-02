@@ -18,27 +18,35 @@ class List extends Component {
     super(props);
 
     this.state = {
-      listTitleFocused: false,
-      newCardFormVisible: false,
+      showListTitleForm: false,
+      showNewCardForm: false,
       showDeleteConfirmation: false,
     };
   }
 
-  toggleTitleFocus = () => {
-    this.setState({ listTitleFocused: !this.state.listTitleFocused });
+  /**
+   * Flips state property that shows/hides input for changing list title
+   */
+  toggleTitleForm = () => {
+    this.setState({ showListTitleForm: !this.state.showListTitleForm });
   }
 
+  /**
+   * Flips state property that shows/hides input for adding new card to list
+   */
   toggleNewCardForm = () => {
-    this.setState({ newCardFormVisible: !this.state.newCardFormVisible });
+    this.setState({ showNewCardForm: !this.state.showNewCardForm });
   }
 
+  /**
+   * Flips state property that shows/hides dialog to delete a list
+   */
   toggleDeleteConfirmation = () => {
     const showDeleteConfirmation = !this.state.showDeleteConfirmation;
     this.setState({ showDeleteConfirmation });
   }
 
   render() {
-    // See if the dnd `provided` props can be lifted into the Board component
     return (
       <div
         className={`list ${listStyle} ${this.state.showDeleteConfirmation && deleteConfirmation}`}
@@ -48,15 +56,15 @@ class List extends Component {
       >
         <div className={`${listTitleStyle} list-title-bar`}>
           {
-            !this.state.listTitleFocused ?
+            !this.state.showListTitleForm ?
               <span
                 role="button"
                 tabIndex={0}
                 className="list-title"
-                onClick={this.toggleTitleFocus}
+                onClick={this.toggleTitleForm}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
-                    this.toggleTitleFocus();
+                    this.toggleTitleForm();
                   }
                 }}
               >
@@ -67,8 +75,8 @@ class List extends Component {
                 onRenameList={this.props.onRenameList}
                 listId={this.props.id}
                 defaultValue={this.props.name}
-                toggleTitleFocus={this.toggleTitleFocus}
-                hideInput={this.toggleTitleFocus}
+                toggleTitleForm={this.toggleTitleForm}
+                hideInput={this.toggleTitleForm}
               />
           }
           <span
@@ -76,10 +84,9 @@ class List extends Component {
             tabIndex={0}
             className="list-delete ion-trash-a"
             onClick={() => this.toggleDeleteConfirmation()}
-            // onClick={() => this.props.onDeleteList(this.props.boardId, this.props.id)}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                // this.props.onDeleteList(this.props.boardId, this.props.id);
+                // Show the delete dialog
                 this.toggleDeleteConfirmation();
               }
             }}
@@ -92,7 +99,7 @@ class List extends Component {
           <button className="list-delete-cancel" onClick={() => this.toggleDeleteConfirmation()}>Cancel</button>
         </div>
 
-        {!this.state.newCardFormVisible ?
+        {!this.state.showNewCardForm ?
           <span
             role="button"
             tabIndex={0}
@@ -145,9 +152,13 @@ List.propTypes = {
   cardIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   /** ID of board that the list belongs to */
   boardId: PropTypes.string.isRequired,
+  /** `RENAME_LIST` action function */
   onRenameList: PropTypes.func.isRequired,
+  /** `DELETE_LIST` action function */
   onDeleteList: PropTypes.func.isRequired,
+  /** `ADD_CARD` action function */
   onAddCard: PropTypes.func.isRequired,
+  /** `provided` object from React Beautiful DnD */
   provided: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

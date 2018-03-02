@@ -91,7 +91,7 @@ const boardListStyle = css`
   }
 `;
 
-const boardWithBackgroundStyle = bg => css`
+const boardItemStyleWithBackground = bg => css`
   ${bg}
 
   width: 100%;
@@ -145,4 +145,4 @@ const boardWithBackgroundStyle = bg => css`
   }
 `;
 
-export { boardListStyle, boardWithBackgroundStyle };
+export { boardListStyle, boardItemStyleWithBackground };

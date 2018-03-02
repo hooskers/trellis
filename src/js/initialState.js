@@ -13,7 +13,6 @@ const initialState = {
       name: 'Test List',
       cardIds: ['card1'],
     },
-
   },
   cards: {
     card1: {
