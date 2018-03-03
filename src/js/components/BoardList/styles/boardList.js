@@ -85,10 +85,10 @@ const boardListStyle = css`
       }
     }
   }
+`;
 
-  .board {
-
-  }
+const boardName = css`
+  font-size: 1.4em;
 `;
 
 const boardItemStyleWithBackground = bg => css`
@@ -99,6 +99,7 @@ const boardItemStyleWithBackground = bg => css`
   margin-bottom: 1.5em;
   color: black;
   z-index: 1;
+  box-shadow: 0px 7px 13px 3px #00000094
 
   .board-info-container {
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
@@ -116,7 +117,9 @@ const boardItemStyleWithBackground = bg => css`
 
   .background-picker {
     height: 100%;
-    width: 125px;
+    width: 10%;
+    min-width: 94px;
+    max-width: 133px;
     overflow: auto;
     display: inline-block;
     float: left;
@@ -126,21 +129,43 @@ const boardItemStyleWithBackground = bg => css`
   .board-link, .board-link:visited {
     text-decoration: none;
     color: inherit;
-    width: calc(100% - 132px);
+    width: 100%;
     height: 100%;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .board-name {
-    font-size: 1.4em;
+    ${boardName}
+    margin: 10px 0 auto 10px;
   }
 
   .edit-board {
-    margin-left: 7px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 2em;
+    font-size: 0.7em;
+    color: black;
+    text-shadow: 0px 0px 1px #0005;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: auto 0 10px 10px;
 
     &:hover {
       cursor: pointer;
       color: red;
+    }
+  }
+
+  .board-editor {
+    .rename-board-input {
+      ${boardName}
+      background: #fffa;
+      border: none;
+      border-bottom: 1px solid black;
+      padding-left: 7px;
     }
   }
 `;

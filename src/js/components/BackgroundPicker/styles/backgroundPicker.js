@@ -3,8 +3,8 @@ import { css } from 'emotion';
 const backgroundPickerPanelStyle = css`
   display: grid;
   grid-template-columns: repeat(auto-fill, 35px);
-  grid-row-gap: 5px;
-  justify-content: space-between;
+  grid-gap: 4px;
+  justify-content: space-around;
   padding: 10px;
 
   .background-button {

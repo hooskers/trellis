@@ -99,17 +99,18 @@ class BoardItem extends Component {
               className="board-link"
             >
               <span className="board-name">{board.name}</span>
-              <span
-                role="button"
+              <button
                 tabIndex={0}
-                className="edit-board ion-edit"
+                className="edit-board"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
                   this.toggleEdit();
                 }}
                 onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
-              />
+              >
+              Edit
+              </button>
             </Link>
           }
         </div>
