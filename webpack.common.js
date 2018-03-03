@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|woff2|svg|ttf)([?]?.*)$/,
-        loader: 'url-loader?limit=50000',
+        loader: 'file-loader?name=fonts/[name].[ext]',
       },
       {
         test: /\.css$/,
