@@ -52,9 +52,8 @@ class List extends Component {
         className={`list ${listStyle} ${this.state.showDeleteConfirmation && deleteConfirmation}`}
         ref={this.props.provided.innerRef}
         {...this.props.provided.draggableProps}
-        {...this.props.provided.dragHandleProps}
       >
-        <div className={`${listTitleStyle} list-title-bar`}>
+        <div className={`${listTitleStyle} list-title-bar`} {...this.props.provided.dragHandleProps}>
           {
             !this.state.showListTitleForm ?
               <span
@@ -117,27 +116,29 @@ class List extends Component {
           />
         }
 
-        <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
-          {providedDrop => (
-            <div className="cards" ref={providedDrop.innerRef}>
-              {this.props.cardIds.map((cardId, index) => (
-                <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
-                  {providedDrag => (
-                    <div>
-                      <CardContainer
-                        provided={providedDrag}
-                        listId={this.props.id}
-                        cardId={cardId}
-                      />
-                      {providedDrag.placeholder}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {providedDrop.placeholder}
-            </div>
-          )}
-        </Droppable>
+        <div className="cards-container">
+          <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
+            {providedDrop => (
+              <div className="cards" ref={providedDrop.innerRef}>
+                {this.props.cardIds.map((cardId, index) => (
+                  <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
+                    {providedDrag => (
+                      <div>
+                        <CardContainer
+                          provided={providedDrag}
+                          listId={this.props.id}
+                          cardId={cardId}
+                        />
+                        {providedDrag.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {providedDrop.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
       </div>
     );
   }

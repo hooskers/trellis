@@ -11,6 +11,7 @@ export const boardHeaderStyle = css`
   padding-bottom: 2.5px;
   box-shadow: 0px 1px 7px 3px #0000001f;
   height: 40px;
+  box-sizing: border-box;
 `;
 
 export const boardTitleStyle = css`
@@ -138,12 +139,11 @@ export const addListBtnStyle = css`
 `;
 
 export const listsStyle = css`
-  display: flex;
+  display: inline-flex;
   padding-top: 15px;
-  overflow-x: auto;
-  overflow-y: hidden;
   align-items: flex-start;
-  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  height: calc(100vh - 40px);
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     font-size: 1.5em;

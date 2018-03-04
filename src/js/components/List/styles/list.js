@@ -13,9 +13,10 @@ export const listStyle = css`
   padding: 8px;
   margin-left: 7px;
   margin-right: 7px;
-  overflow-y: auto;
-  max-height: 96%;
+  margin-bottom: 20px;
   position: relative;
+  max-height: calc(100% - 15px);
+  box-sizing: border-box;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;
@@ -88,8 +89,11 @@ export const listStyle = css`
     }
   }
   
-  .cards {
-    min-height: 20px;
+  .cards-container {
+    overflow-y: scroll;
+    .cards {
+      min-height: 20px;
+    }
   }
 `;
 

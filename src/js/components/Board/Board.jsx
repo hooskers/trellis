@@ -157,26 +157,36 @@ class Board extends Component {
         </div>
 
         <DragDropContext onDragEnd={this.dragEnd}>
-          <Droppable droppableId="lists" direction="horizontal" type="LIST">
-            {providedDrop => (
-              <div id="lists" className={`${listsStyle} ${backgrounds[this.props.background]}`} ref={providedDrop.innerRef}>
-                {this.props.listIds.map((listId, index) => (
-                  <Draggable key={listId} index={index} draggableId={listId} type="LIST">
-                    {providedDrag => (
-                      <div>
-                        <ListContainer
-                          provided={providedDrag}
-                          boardId={this.props.id}
-                          listId={listId}
-                        />
-                        {providedDrag.placeholder}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-              </div>
-            )}
-          </Droppable>
+          <div
+            id="lists-container"
+            style={{ overflowX: 'auto', overflowY: 'hidden' }}
+          >
+            <Droppable droppableId="lists" direction="horizontal" type="LIST">
+              {providedDrop => (
+                <div
+                  id="lists"
+                  className={`${listsStyle} ${backgrounds[this.props.background]}`}
+                  ref={providedDrop.innerRef}
+                >
+                  {this.props.listIds.map((listId, index) => (
+                    <Draggable key={listId} index={index} draggableId={listId} type="LIST">
+                      {providedDrag => (
+                        <div>
+                          <ListContainer
+                            provided={providedDrag}
+                            boardId={this.props.id}
+                            listId={listId}
+                          />
+                          {providedDrag.placeholder}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {providedDrop.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
         </DragDropContext>
       </Fragment>
     );
