@@ -90,7 +90,7 @@ export const listStyle = css`
   }
   
   .cards-container {
-    overflow-y: scroll;
+    overflow-y: auto;
     .cards {
       min-height: 20px;
     }

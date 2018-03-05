@@ -171,14 +171,14 @@ class Board extends Component {
                   {this.props.listIds.map((listId, index) => (
                     <Draggable key={listId} index={index} draggableId={listId} type="LIST">
                       {providedDrag => (
-                        <div>
+                        <Fragment>
                           <ListContainer
                             provided={providedDrag}
                             boardId={this.props.id}
                             listId={listId}
                           />
                           {providedDrag.placeholder}
-                        </div>
+                        </Fragment>
                       )}
                     </Draggable>
                   ))}

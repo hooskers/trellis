@@ -94,6 +94,7 @@ const boardName = css`
 const boardItemStyleWithBackground = bg => css`
   ${bg}
 
+  flex-shrink: 0;
   width: 100%;
   height: 10em;
   margin-bottom: 1.5em;

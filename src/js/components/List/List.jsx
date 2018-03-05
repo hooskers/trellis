@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
@@ -123,14 +123,14 @@ class List extends Component {
                 {this.props.cardIds.map((cardId, index) => (
                   <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
                     {providedDrag => (
-                      <div>
+                      <Fragment>
                         <CardContainer
                           provided={providedDrag}
                           listId={this.props.id}
                           cardId={cardId}
                         />
                         {providedDrag.placeholder}
-                      </div>
+                      </Fragment>
                     )}
                   </Draggable>
                 ))}
