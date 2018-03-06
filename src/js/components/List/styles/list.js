@@ -8,7 +8,7 @@ export const listStyle = css`
   box-shadow: 0px 0px 3px 1px #0000005c;
   display: flex;
   flex-direction: column;
-  min-width: 15vw;
+  min-width: 250px;
   width: 15vw;
   margin-left: 7px;
   margin-right: 7px;
@@ -18,7 +18,6 @@ export const listStyle = css`
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     min-width: 85vw;
-    overflow-y: scroll;
   }
 
   &::before {
