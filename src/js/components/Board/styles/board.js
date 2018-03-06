@@ -10,7 +10,8 @@ export const boardHeaderStyle = css`
   padding-top: 2.5px;
   padding-bottom: 2.5px;
   box-shadow: 0px 1px 7px 3px #0000001f;
-  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
   box-sizing: border-box;
 `;
 
@@ -32,7 +33,7 @@ export const addListBtnStyle = css`
   padding: inherit;
   font-size: 1.15em;
   cursor: pointer;
-  height: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
   padding-left: 7px;
@@ -143,7 +144,7 @@ export const listsStyle = css`
   padding-top: 15px;
   align-items: flex-start;
   box-sizing: border-box;
-  height: 100%;
+  min-height: 100%;
   min-width: 100vw;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

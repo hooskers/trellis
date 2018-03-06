@@ -116,29 +116,27 @@ class List extends Component {
           />
         }
 
-        <div className="cards-container">
-          <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
-            {providedDrop => (
-              <div className="cards" ref={providedDrop.innerRef}>
-                {this.props.cardIds.map((cardId, index) => (
-                  <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
-                    {providedDrag => (
-                      <Fragment>
-                        <CardContainer
-                          provided={providedDrag}
-                          listId={this.props.id}
-                          cardId={cardId}
-                        />
-                        {providedDrag.placeholder}
-                      </Fragment>
-                    )}
-                  </Draggable>
-                ))}
-                {providedDrop.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
+        <Droppable droppableId={this.props.id} direction="vertical" type="CARD">
+          {providedDrop => (
+            <div className="cards" ref={providedDrop.innerRef}>
+              {this.props.cardIds.map((cardId, index) => (
+                <Draggable key={cardId} index={index} draggableId={cardId} type="CARD">
+                  {providedDrag => (
+                    <Fragment>
+                      <CardContainer
+                        provided={providedDrag}
+                        listId={this.props.id}
+                        cardId={cardId}
+                      />
+                      {providedDrag.placeholder}
+                    </Fragment>
+                  )}
+                </Draggable>
+              ))}
+              {providedDrop.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
     );
   }

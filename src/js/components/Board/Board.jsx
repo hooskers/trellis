@@ -159,7 +159,7 @@ class Board extends Component {
         <DragDropContext onDragEnd={this.dragEnd}>
           <div
             id="lists-container"
-            style={{ overflowX: 'auto', overflowY: 'hidden' }}
+            style={{ overflow: 'auto' }}
           >
             <Droppable droppableId="lists" direction="horizontal" type="LIST">
               {providedDrop => (

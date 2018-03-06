@@ -10,12 +10,10 @@ export const listStyle = css`
   flex-direction: column;
   min-width: 15vw;
   width: 15vw;
-  padding: 8px;
   margin-left: 7px;
   margin-right: 7px;
   margin-bottom: 20px;
   position: relative;
-  max-height: calc(100% - 15px);
   box-sizing: border-box;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
@@ -41,10 +39,11 @@ export const listStyle = css`
     transition: opacity 0.15s ease-in-out;
     pointer-events: none;
     
-    display: grid;
+    display: none;
     z-index: 2;
     grid-template-columns: 1fr 1fr;
-    position: absolute;
+    position: sticky;
+    top: 0;
     left: 0;
     width: 100%;
     
@@ -89,11 +88,9 @@ export const listStyle = css`
     }
   }
   
-  .cards-container {
-    overflow-y: auto;
-    .cards {
-      min-height: 20px;
-    }
+  .cards {
+    min-height: 20px;
+    padding: 8px;
   }
 `;
 
@@ -117,6 +114,7 @@ export const deleteConfirmation = css`
   .list-delete-confirmation {
     opacity: 1;
     pointer-events: auto;
+    display: grid;
   }
 
   .list-title-bar {
@@ -129,6 +127,16 @@ export const deleteConfirmation = css`
 export const listTitleStyle = css`
   font-size: 1.3em;
   margin-bottom: 0.25em;
+  font-size: 1.3em;
+  margin-bottom: 0.25em;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 20px;
+  background-color: #d0d0d0;
+  z-index: 5;
+  padding: 7px;
+  border-radius: 5px;
 
   .list-title {
     float: left;
@@ -158,6 +166,8 @@ export const newCardButtonStyle = css`
   ${cardBackgroundStyle}
   box-shadow: none;
   cursor: pointer;
+  margin-left: 7px;
+  margin-right: 7px;
   padding-left: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
