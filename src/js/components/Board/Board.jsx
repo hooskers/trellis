@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import ListContainer from '../List/ListContainer';
-import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle } from './styles/board';
+import { addListBtnStyle, boardHeaderStyle, boardTitleStyle, listsStyle, boardContainerStyle } from './styles/board';
 import * as backgrounds from '../BackgroundPicker/styles/backgrounds';
 
 /**
@@ -82,7 +82,7 @@ class Board extends Component {
     const { showNewListInput, newListValue } = this.state;
 
     return (
-      <Fragment>
+      <div className={`board-container ${boardContainerStyle}`}>
         <div
           id="board-header"
           className={`${boardHeaderStyle}`}
@@ -157,38 +157,38 @@ class Board extends Component {
         </div>
 
         <DragDropContext onDragEnd={this.dragEnd}>
-          <div
+          {/* <div
             id="lists-container"
             style={{ overflow: 'auto' }}
-          >
-            <Droppable droppableId="lists" direction="horizontal" type="LIST">
-              {providedDrop => (
-                <div
-                  id="lists"
-                  className={`${listsStyle} ${backgrounds[this.props.background]}`}
-                  ref={providedDrop.innerRef}
-                >
-                  {this.props.listIds.map((listId, index) => (
-                    <Draggable key={listId} index={index} draggableId={listId} type="LIST">
-                      {providedDrag => (
-                        <Fragment>
-                          <ListContainer
-                            provided={providedDrag}
-                            boardId={this.props.id}
-                            listId={listId}
-                          />
-                          {providedDrag.placeholder}
-                        </Fragment>
-                      )}
-                    </Draggable>
-                  ))}
-                  {providedDrop.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+          > */}
+          <Droppable droppableId="lists" direction="horizontal" type="LIST">
+            {providedDrop => (
+              <div
+                id="lists"
+                className={`${listsStyle} ${backgrounds[this.props.background]}`}
+                ref={providedDrop.innerRef}
+              >
+                {this.props.listIds.map((listId, index) => (
+                  <Draggable key={listId} index={index} draggableId={listId} type="LIST">
+                    {providedDrag => (
+                      <Fragment>
+                        <ListContainer
+                          provided={providedDrag}
+                          boardId={this.props.id}
+                          listId={listId}
+                        />
+                        {providedDrag.placeholder}
+                      </Fragment>
+                    )}
+                  </Draggable>
+                ))}
+                {providedDrop.placeholder}
+              </div>
+            )}
+          </Droppable>
+          {/* </div> */}
         </DragDropContext>
-      </Fragment>
+      </div>
     );
   }
 }

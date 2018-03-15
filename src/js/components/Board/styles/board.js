@@ -1,24 +1,31 @@
 import { css } from 'react-emotion';
 
+export const boardContainerStyle = css`
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+`;
+
 export const boardHeaderStyle = css`
   display: flex;
   align-items: center;
-  background-color: white;
   position: sticky;
   left: 0px;
-  padding-left: 15px;
   padding-top: 2.5px;
   padding-bottom: 2.5px;
-  box-shadow: 0px 1px 7px 3px #0000001f;
   min-height: 40px;
   max-height: 40px;
   box-sizing: border-box;
+  box-shadow: 0px 1px 7px 3px #0000001f;
+  background-color: white;
 `;
 
 export const boardTitleStyle = css`
-  font-size: 2em;
+  position: sticky;
   float: left;
-  margin-right: auto;
+  left: 0;
+  font-size: 2em;
+  padding-left: 15px;
   
   &.new-list-form-open {
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
@@ -40,6 +47,9 @@ export const addListBtnStyle = css`
   padding-right: 0px;
   margin-right: 20px;
   outline: none;
+  margin-left: auto;
+  position: sticky;
+  right: 15px;
 
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     padding-right: 0px;
