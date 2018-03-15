@@ -2,35 +2,56 @@
 
 This is a simple Trello clone for me to tinker with in my free time.
 
+## Pardon my dust
+This is just a free time project that I work on for enjoyment and is not 100% complete.... only like 90% complete! There are still some styles and Jest tests to be added, but the basic feature set is there.
+
 ## Tech
 - [React](https://github.com/facebook/react)
 - [Redux](https://github.com/reactjs/redux)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [Emotion](https://github.com/emotion-js/emotion) (Let's me keep CSS in the same file as the React component and use actual CSS syntax. I really love this library!)
-- [Lodash](https://github.com/lodash/lodash) (Just a little)
-
-## TODO
-Since this is just something I tinker with in my free time, there is still a lot to do, and I'm excited to see how it will turn out in the end when everything is pieced together.
-- Board IDs
-  - Since you can route directly to a board, they need a typeable ID. Might just use their name as the ID and enforce a uniqueness constraint on board names.
-- Styling
-  - It's ugly right now. It's all gray/white and there are no animations. It's just at a place that it isn't a pain to work with.
-- Drag and drop styling.
-  - Lists and cards can be dragged and dropped to new places with mouse, touch, and keyboard actions, but there is no styling to show that dnd has been activated. Especially confusing when using keyboard dnd actions.
-- Fully offline
-  - To use the [Ionicons font](http://ionicons.com/), I just link to its CDN resource in `index.html` because it was quick and easy and I wanted that trashcan icon! But, really, I should pull the style sheet directly into the project so Trellis can be used offline.
+- [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd) (Another awesome library)
 
 ## Usage
-You can create/delete boards with a name. Within those boards you can create/delete lists with a name. Within those lists you can create/delete cards.
+When you first load Trellis you are presented with the board list with one default board. You can enter a name into the input at the top to add a new board.
+The edit button of the board will allow you to change the board's background (custom solid colors coming soon, sorry!) and also change the board's name and delete it.
+To see the board, click on its banner.
 
-You can route directly to a board by using the `/#/board/:boardid` route.
+In the board you can add a list by clicking the `+` symbol in the top right and entering a name for your new list.
+A list can be deleted by clicking the trashcan icon in the top right and confirming the delete.
+You can rerrange the order of the lists with the mouse by dragging the list by its title bar and dropping it somewhere else on the board. Or you can also achieve the same thing with keyboard by giving the title bar of the list focus, pressing space to lift the list, using the arrow keys to shift it, and the spacebar to drop it in its new position. (Thanks React Beautiful DnD!)
 
-Names and descriptions can be changed by clicking on them. Submitting the input (Enter) or clicking outside of the input will save them.
+You can add a new card to a list by clicking the `Add a card` button at the top of the list and entering in a name and description for the card.
+You can "done" a card by clicking the checkmark in the bottom left.
+To delete a card, click the trashcan icon in the bottom right.
+You can rearrange the cards in a similar fashion to lists by using the mouse or keyboard. You can put the card in a new position in the same list, or transfer it to another list in the board.
 
-Submitting the input or clicking outside of the input will save it.
+## Development
+To develop with Trellis just download the repo install the Yarn packages:
+```bash
+$ yarn
+```
 
-Click the checkmark on a card to mark/unmark the card as done. This doesn't really do anything for now. It will most likely just put a strikethrough through the name and description, though.
+To start a live reload Webpack dev server run:
+```bash
+$ yarn start
+```
 
-Click the trash icon on a card to delete it. There's no confirmation, as of now, so make sure you definitely want to delete it!
+To build the production version of Trellis which gets outputted to the `docs` directory (for GitHub Pages) run:
+```bash
+$ yarn build
+```
 
-Click the trash icon on a list to delete it. There's no confirmation, as of now, so make sure you definitely want to delete it!
+It helps to develop components with Storybook and a live Storybook server can be started with:
+```bash
+$ yarn storybook
+```
+
+Tests can be run with:
+```bash
+$ yarn test
+```
+or to run the tests after a change:
+```bash
+$ yarn test:watch
+```
