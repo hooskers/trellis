@@ -142,21 +142,51 @@ const boardItemStyleWithBackground = bg => css`
     margin: 10px 0 auto 10px;
   }
 
-  .edit-board {
-    background-color: #fff;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 2em;
-    font-size: 0.7em;
-    color: black;
-    text-shadow: 0px 0px 1px #0005;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin: auto 0 10px 10px;
+  .board-buttons {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    position: relative;
+    width: auto;
+    display: inline-block;
+    
+    &.editing {
+      height: 100%;
+    }
 
-    &:hover {
-      cursor: pointer;
-      color: red;
+    .board-button {
+      border-radius: 5px;
+      height: 2em;
+      width: 6em;
+      font-size: 0.7em;
+      text-shadow: 0px 0px 1px #0005;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-right: 10px;
+      display: block;
+      
+      &:hover {
+        cursor: pointer;
+        opacity: .75;
+      }
+      
+      &.edit-board {
+        background-color: #fff;
+        border: 1px solid black;
+        color: black;
+        float: left;
+
+        &.close {
+          position: absolute;
+          margin-bottom: 10px;
+          bottom: 0;
+        }
+      }
+  
+      &.delete-board {
+        background-color: #ff2123;
+        border: 1px solid white;
+        color: white;
+      }
     }
   }
 
@@ -165,8 +195,9 @@ const boardItemStyleWithBackground = bg => css`
       ${boardName}
       background: #fffa;
       border: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid #000a;
       padding-left: 7px;
+      max-width: 8.5em;
     }
   }
 `;

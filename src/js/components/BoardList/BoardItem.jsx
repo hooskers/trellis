@@ -57,38 +57,30 @@ class BoardItem extends Component {
               <div className="background-picker">
                 <BackgroundPickerContainer boardId={board.id} />
               </div>
-              <input
-                className="rename-board-input"
-                placeholder="Rename board"
-                autoComplete="off"
-                defaultValue={board.name}
-                ref={(node) => {
-                  renameBoardInput = node;
-                }}
-              />
-              <button className="rename-board-submit">Rename board</button>
-              <span
-                role="button"
-                tabIndex={0}
-                className="delete-board ion-trash-a"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  onDeleteBoard(board.id);
-                }}
-                onKeyPress={e => e.key === 'Enter' && onDeleteBoard(board.id)}
-              />
-              <span
-                role="button"
-                tabIndex={0}
-                className="edit-board ion-close-round"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  this.toggleEdit();
-                }}
-                onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
-              />
+              <div className="board-buttons editing">
+                <input
+                  className="rename-board-input"
+                  placeholder="Rename board"
+                  autoComplete="off"
+                  defaultValue={board.name}
+                  ref={(node) => {
+                    renameBoardInput = node;
+                  }}
+                  onKeyPress={() => onRenameBoard(board.id, renameBoardInput.value.trim())}
+                />
+                <button
+                  tabIndex={0}
+                  className="close board-button edit-board"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    this.toggleEdit();
+                  }}
+                  onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
+                >
+                  Close
+                </button>
+              </div>
             </form>
           }
           {!this.state.showEdit &&
@@ -99,18 +91,32 @@ class BoardItem extends Component {
               className="board-link"
             >
               <span className="board-name">{board.name}</span>
-              <button
-                tabIndex={0}
-                className="edit-board"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  this.toggleEdit();
-                }}
-                onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
-              >
-              Edit
-              </button>
+              <div className="board-buttons">
+                <button
+                  tabIndex={0}
+                  className="board-button edit-board"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    this.toggleEdit();
+                  }}
+                  onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
+                >
+                Edit
+                </button>
+                <button
+                  tabIndex={0}
+                  className="board-button delete-board"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    onDeleteBoard(board.id);
+                  }}
+                  onKeyPress={e => e.key === 'Enter' && onDeleteBoard(board.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </Link>
           }
         </div>
