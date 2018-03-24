@@ -119,12 +119,12 @@ const boardItemStyleWithBackground = bg => css`
   .background-picker {
     height: 100%;
     width: 10%;
-    min-width: 94px;
     max-width: 133px;
     overflow: auto;
     display: inline-block;
     float: left;
     margin-right: 7px;
+    margin-left: 7px;
   }
 
   .board-link, .board-link:visited {
@@ -143,12 +143,14 @@ const boardItemStyleWithBackground = bg => css`
   }
 
   .board-buttons {
-    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-left: 10px;
+    box-sizing: border-box;
     position: relative;
     width: auto;
     display: inline-block;
-    
+
     &.editing {
       height: 100%;
     }
