@@ -66,10 +66,12 @@ class BoardItem extends Component {
                   ref={(node) => {
                     renameBoardInput = node;
                   }}
-                  onKeyPress={() => onRenameBoard(board.id, renameBoardInput.value.trim())}
+                  // onKeyPress={() => console.log('popo')}
+                  onKeyUp={() => onRenameBoard(board.id, renameBoardInput.value.trim())}
                 />
                 <button
                   tabIndex={0}
+                  type="submit"
                   className="close board-button edit-board"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -78,7 +80,7 @@ class BoardItem extends Component {
                   }}
                   onKeyPress={e => e.key === 'Enter' && this.toggleEdit()}
                 >
-                  Close
+                  Save
                 </button>
               </div>
             </form>
