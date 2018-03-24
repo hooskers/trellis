@@ -1,6 +1,6 @@
 import { css } from 'react-emotion';
 import { cardStyle } from '../../Card/styles/card';
-import { cardInputStyle } from '../../Card/styles/cardInput';
+import cardListInputStyle from '../../../styles/inputs';
 
 /** Styles for the form to add a new card */
 const newCardFormStyle = css`
@@ -15,7 +15,7 @@ const newCardFormStyle = css`
     grid-column-start: 1;
     grid-column-end: 3;
 
-    ${cardInputStyle}
+    ${cardListInputStyle}
   }
 
   textarea.new-description {
@@ -23,7 +23,7 @@ const newCardFormStyle = css`
     grid-column-start: 1;
     grid-column-end: 3;
 
-    ${cardInputStyle}
+    ${cardListInputStyle}
     font-weight: normal;
   }
 

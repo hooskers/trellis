@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import cardListInputStyle from '../../styles/inputs';
+
 /**
  * Input that shows when you click the list title
  * Allows user to rename the list
@@ -52,6 +54,7 @@ const ListTitleInput = ({
         ref={(node) => {
           listNameInput = node;
         }}
+        className={cardListInputStyle}
       />
     </form>
   );
